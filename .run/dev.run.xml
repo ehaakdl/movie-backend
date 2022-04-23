@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="dev" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" value="dev" />
+    <option name="DEBUG_MODE" value="true" />
+    <option name="HIDE_BANNER" value="true" />
+    <module name="movie.main" />
+    <projectPathOnTarget name="projectPathOnTarget" value="/movie/project" />
+    <target name="root@localhost:2200" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.mose.movie.MovieApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
