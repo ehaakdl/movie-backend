@@ -7,8 +7,8 @@ plugins {
 
 group = 'com.mose.movie'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-
+sourceCompatibility = JavaVersion.VERSION_18
+targetCompatibility = JavaVersion.VERSION_17
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
