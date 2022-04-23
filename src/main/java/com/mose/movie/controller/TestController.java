@@ -19,7 +19,7 @@ public class TestController {
         for (MultipartFile file : files) {
             log.info("파일이름: {}", file.getOriginalFilename());
             String originalfileName = file.getOriginalFilename();
-            File dest = new File("./store/" + originalfileName);
+            File dest = new File("./test/" + originalfileName);
             file.transferTo(dest);
         }
         return list;

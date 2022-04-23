@@ -44,4 +44,4 @@ spring:
       on-profile: dev
   servlet:
     multipart:
-      location: ./movie
+      location: /movie/temp
