@@ -2,7 +2,7 @@ package com.mose.movie.controller;
 
 import com.mose.movie.etc.define.ApiException;
 import com.mose.movie.etc.define.ResponseFormat;
-import com.mose.movie.etc.define.eErrorInfo;
+import com.mose.movie.etc.define.eResponseErrorInfo;
 import com.mose.movie.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.bind.validation.BindValidationException;
@@ -24,7 +24,7 @@ public class ErrorController {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ResponseFormat(
-                eErrorInfo.BAD_PARAMETER.getMessage(),
+                eResponseErrorInfo.BAD_PARAMETER.getMessage(),
                 false,
                 null));
     }
@@ -37,7 +37,7 @@ public class ErrorController {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ResponseFormat(
-                        eErrorInfo.BAD_PARAMETER.getMessage(),
+                        eResponseErrorInfo.BAD_PARAMETER.getMessage(),
                         false,
                         null));
     }
@@ -61,7 +61,7 @@ public class ErrorController {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ResponseFormat(
-                eErrorInfo.DEFAULT.getMessage()
+                eResponseErrorInfo.DEFAULT.getMessage()
                 , false
                 ,null));
     }
