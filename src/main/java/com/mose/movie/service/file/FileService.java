@@ -1,4 +1,4 @@
-package com.mose.movie.service.File;
+package com.mose.movie.service.file;
 
 public interface FileService {
     void upload(String path);

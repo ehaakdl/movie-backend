@@ -1,4 +1,4 @@
-package com.mose.movie.service.File;
+package com.mose.movie.service.file;
 
 import org.springframework.stereotype.Service;
 

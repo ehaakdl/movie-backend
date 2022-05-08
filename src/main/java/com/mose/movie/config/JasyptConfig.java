@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Slf4j
 public class JasyptConfig {
-    @Bean
+    @Bean("Jasypt")
     public StringEncryptor jasyptStringEncryptor() {
         final String JASYPT_PASSWD_ENV = "JASYPT_PASSWD";
         String key = System.getenv(JASYPT_PASSWD_ENV);

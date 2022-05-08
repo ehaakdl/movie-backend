@@ -9,4 +9,6 @@ public class Urls {
     public static final String index = "/";
     public static final String index_blank = "";
     public static final String GAME = "/game";
+    public static final String FILE_UPLOAD = "/upload";
+    public static final String FILE_DOWNLOAD = "/download";
 }
