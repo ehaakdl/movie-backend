@@ -1,11 +1,14 @@
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   servlet:
     multipart:
       file-size-threshold: 1024MB
       max-file-size: 10GB
       max-request-size: 100GB
   datasource:
-    #url: ENC(AmjDJqwXWxXbNLxT2tqrt7evRCK8NdAJ/KVEtB7usTsoUzlncqDsMcIiJbPEo2eR7470koIhMEpI1Ut2Ywum/kwxsbK3eM7x) ?? ???
+    #url: ENC(AmjDJqwXWxXbNLxT2tqrt7evRCK8NdAJ/KVEtB7usTsoUzlncqDsMcIiJbPEo2eR7470koIhMEpI1Ut2Ywum/kwxsbK3eM7x)
     url: jdbc:mysql://localhost:3306/movie?serverTimezone=Asia/Seoul
     username: ENC(5/AhqAagHOPYLAK/ZmVpWQ==)
     password: ENC(7tcKhS5JXkdK1pfbDxbgHA==)
