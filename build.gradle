@@ -28,6 +28,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-data-rest'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'com.jayway.jsonpath:json-path:2.7.0'
     implementation 'org.springframework.session:spring-session-core'
