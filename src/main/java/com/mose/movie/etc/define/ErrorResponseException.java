@@ -1,17 +1,20 @@
 package com.mose.movie.etc.define;
 
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
 
 @Getter
 public class ErrorResponseException extends RuntimeException {
-    private final String message;
-    private final HttpStatus httpStatus;
+    private final eResponseErrorInfo errorResponseInfo;
     private final boolean success;
 
     public ErrorResponseException(final eResponseErrorInfo e, final boolean success) {
-        this.httpStatus = e.getHttpStatus();
-        this.message = e.getMessage();
+        this.errorResponseInfo = e;
         this.success = success;
+    }
+
+    public ErrorResponseException(Throwable cause, final eResponseErrorInfo e, boolean success) {
+        super(cause);
+        this.success = success;
+        this.errorResponseInfo = e;
     }
 }
