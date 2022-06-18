@@ -15,13 +15,14 @@ public class JasyptConfig {
     @Bean
     public StringEncryptor jasyptStringEncryptor() {
         final String JASYPT_PASSWD_ENV = "JASYPT_PASSWD";
-        String key = System.getenv(JASYPT_PASSWD_ENV);
-        String algorithm = "PBEWithMD5AndDES";
+        final String key = System.getenv(JASYPT_PASSWD_ENV);
+        final String algorithm = "PBEWithMD5AndDES";
 
         if (key == null) {
             String errorMsg = JASYPT_PASSWD_ENV + " 환경변수 값이 NULL 입니다.";
-            log.error(errorMsg, new NullPointerException());
-            throw new NullPointerException(errorMsg);
+            log.info(errorMsg);
+            log.debug(errorMsg, new RuntimeException(errorMsg));
+            throw new RuntimeException(errorMsg);
         }
 
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
