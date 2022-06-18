@@ -1,7 +1,7 @@
 package com.mose.movie.controller;
 
 import com.mose.movie.etc.define.ErrorResponseException;
-import com.mose.movie.utils.CommonUtils;
+import com.mose.movie.component.utils.CommonUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
