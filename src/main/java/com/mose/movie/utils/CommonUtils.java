@@ -1,19 +1,20 @@
 package com.mose.movie.utils;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public final class CommonUtils {
-    public static String getStackTraceElements(Throwable e){
+
+    public String getStackTraceElements(final Throwable e){
         StackTraceElement[] stackElements;
         StringBuilder result = new StringBuilder();
-        if(e.getCause() == null){
-            stackElements = e.getStackTrace();
-        } else {
-            stackElements = e.getCause().getStackTrace();
-        }
-
+        stackElements = e.getStackTrace();
         if (stackElements == null || stackElements.length == 0) {
             return null;
         }
 
+        result.append(e);
+        result.append('\n');
         for (StackTraceElement stackElement : stackElements) {
             result.append(stackElement);
             result.append('\n');
