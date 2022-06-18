@@ -26,8 +26,8 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("movie project")
-                .description("movie projcet api doc")
-                .version("1.0")
+                .description("movie project api doc")
+                .version("0.0.1-SNAPSHOT")
                 .build();
     }
 }
