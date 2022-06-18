@@ -3,7 +3,7 @@ package com.mose.movie.controller;
 import com.mose.movie.etc.define.ErrorResponseException;
 import com.mose.movie.etc.define.ResponseDTO;
 import com.mose.movie.etc.define.eResponseErrorInfo;
-import com.mose.movie.utils.CommonUtils;
+import com.mose.movie.component.utils.CommonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

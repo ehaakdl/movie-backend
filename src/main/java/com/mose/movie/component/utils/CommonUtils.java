@@ -1,4 +1,4 @@
-package com.mose.movie.utils;
+package com.mose.movie.component.utils;
 
 import org.springframework.stereotype.Component;
 
