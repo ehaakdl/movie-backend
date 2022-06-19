@@ -11,4 +11,5 @@ public class Urls {
     public static final String GAME = "/game";
     public static final String FILE_UPLOAD = "/upload";
     public static final String FILE_DOWNLOAD = "/download";
+    public static final String CSRF_TOKEN = "/csrf/token";
 }
