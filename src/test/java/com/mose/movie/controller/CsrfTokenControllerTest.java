@@ -28,6 +28,7 @@ class CsrfTokenControllerTest {
     private String csrfToken;
     private String parameterName;
     private String headerName;
+    private String TEST_URL = "/test";
 
     @BeforeEach
     void createCsrfToken() throws Exception {
@@ -49,20 +50,20 @@ class CsrfTokenControllerTest {
     @Test
     void requestParamCsrfToken() throws Exception {
         mockMvc
-                .perform(post("/test").param(parameterName, csrfToken).session(session))
+                .perform(post(TEST_URL).param(parameterName, csrfToken).session(session))
                 .andExpect(status().isOk());
     }
 
     @Test
     void requestHeaderCsrfToken() throws Exception {
         mockMvc
-                .perform(post("/test").header(headerName, csrfToken).session(session))
+                .perform(post(TEST_URL).header(headerName, csrfToken).session(session))
                 .andExpect(status().isOk());
     }
     @Test
     void requestNoCsrfToken() throws Exception {
         mockMvc
-                .perform(post("/test").session(session))
+                .perform(post(TEST_URL).session(session))
                 .andExpect(status().isForbidden());
     }
 }

@@ -18,7 +18,7 @@ public class SwaggerConfig {
                 .useDefaultResponseMessages(false)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.mose.movie.controller"))
-                .paths(PathSelectors.any())
+                .paths(PathSelectors.ant("/**"))
                 .build()
                 .apiInfo(apiInfo());
     }
