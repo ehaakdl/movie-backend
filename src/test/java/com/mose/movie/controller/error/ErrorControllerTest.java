@@ -1,5 +1,6 @@
-package com.mose.movie.controller;
+package com.mose.movie.controller.error;
 
+import com.mose.movie.controller.ErrorController;
 import com.mose.movie.etc.define.ErrorResponseException;
 import com.mose.movie.component.utils.CommonUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.mose.movie.controller.ErrorControllerTest.TestController.TEST_URL;
+import static com.mose.movie.controller.error.ErrorControllerTest.TestController.TEST_URL;
 import static com.mose.movie.etc.define.eResponseErrorInfo.DEFAULT;
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
@@ -28,6 +29,7 @@ class ErrorControllerTest {
                 .build();
     }
 
+    /*에러 유형에 따른 표준 응답 체크*/
     @Test
     void errorResponseException() throws Exception {
         mockMvc

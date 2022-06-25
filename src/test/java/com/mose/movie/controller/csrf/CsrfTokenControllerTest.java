@@ -1,4 +1,4 @@
-package com.mose.movie.controller;
+package com.mose.movie.controller.csrf;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -47,6 +47,7 @@ class CsrfTokenControllerTest {
         headerName = responseJson.get("headerName").getAsString();
     }
 
+    /*토큰을 파라미터에 넣었을 때 정상 작동 하는지 체크*/
     @Test
     void requestParamCsrfToken() throws Exception {
         mockMvc
@@ -54,12 +55,15 @@ class CsrfTokenControllerTest {
                 .andExpect(status().isOk());
     }
 
+    /*토큰을 헤더에 넣을 떄 정상 작동 체크*/
     @Test
     void requestHeaderCsrfToken() throws Exception {
         mockMvc
                 .perform(post(TEST_URL).header(headerName, csrfToken).session(session))
                 .andExpect(status().isOk());
     }
+
+    /*토큰 헤더에 안 넣을 때 체크*/
     @Test
     void requestNoCsrfToken() throws Exception {
         mockMvc

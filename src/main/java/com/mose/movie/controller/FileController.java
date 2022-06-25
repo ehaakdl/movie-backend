@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -28,7 +29,7 @@ public class FileController {
     }
 
     @PostMapping(Urls.FILE_DOWNLOAD)
-    public List<String> download(@RequestPart(ParameterNm.FILE) MultipartFile file) {
+    public List<String> download(HttpSession session, @RequestPart(ParameterNm.FILE) MultipartFile file) {
 
         return null;
     }

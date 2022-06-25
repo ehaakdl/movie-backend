@@ -1,4 +1,4 @@
-package com.mose.movie.controller;
+package com.mose.movie.controller.csrf;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
