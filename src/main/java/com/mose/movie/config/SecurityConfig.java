@@ -19,14 +19,14 @@ public class SecurityConfig {
         http
                 .csrf()
                 .csrfTokenRepository(sessionCsrfRepository())
-                .ignoringRequestMatchers((request -> request
-                        .getRequestURI()
-                        .equals(Urls.CSRF_TOKEN)))
+                .ignoringAntMatchers(Urls.CSRF_TOKEN, "/h2-console/**")
                 .and()
                 .authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-                        .anyRequest()
-                        .permitAll()
+                        .anyRequest().permitAll()
                 )
+                .headers()
+//                .addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
+                .and()
                 .httpBasic(withDefaults());
         return http.build();
     }
