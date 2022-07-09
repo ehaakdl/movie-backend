@@ -1,7 +1,7 @@
 package com.mose.movie.controller;
 
-import com.mose.movie.etc.define.ErrorResponseException;
-import com.mose.movie.etc.define.ResponseDTO;
+import com.mose.movie.exception.ErrorResponseException;
+import com.mose.movie.dto.ResponseDTO;
 import com.mose.movie.etc.define.eResponseErrorInfo;
 import com.mose.movie.component.utils.CommonUtils;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package com.mose.movie.controller.error;
 
 import com.mose.movie.controller.ErrorController;
-import com.mose.movie.etc.define.ErrorResponseException;
+import com.mose.movie.exception.ErrorResponseException;
 import com.mose.movie.component.utils.CommonUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

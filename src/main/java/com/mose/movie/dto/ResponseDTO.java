@@ -1,4 +1,4 @@
-package com.mose.movie.etc.define;
+package com.mose.movie.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

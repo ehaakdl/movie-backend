@@ -1,5 +1,6 @@
 package com.mose.movie.controller;
 
+import com.mose.movie.dto.ResponseDTO;
 import com.mose.movie.etc.define.*;
 import com.mose.movie.service.file.FileService;
 import lombok.extern.slf4j.Slf4j;

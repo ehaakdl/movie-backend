@@ -1,5 +1,6 @@
-package com.mose.movie.etc.define;
+package com.mose.movie.exception;
 
+import com.mose.movie.etc.define.eResponseErrorInfo;
 import lombok.Getter;
 
 @Getter
