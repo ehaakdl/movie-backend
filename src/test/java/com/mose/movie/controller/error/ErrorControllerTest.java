@@ -4,6 +4,7 @@ import com.mose.movie.controller.ErrorController;
 import com.mose.movie.exception.ErrorResponseException;
 import com.mose.movie.component.utils.CommonUtils;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,8 +30,8 @@ class ErrorControllerTest {
                 .build();
     }
 
-    /*에러 유형에 따른 표준 응답 체크*/
     @Test
+    @DisplayName("에러 유형에 따른 표준 응답 체크")
     void errorResponseException() throws Exception {
         mockMvc
                 .perform(post(TEST_URL).param("param", String.valueOf(1)))

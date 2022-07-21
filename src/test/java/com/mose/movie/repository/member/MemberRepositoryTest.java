@@ -2,7 +2,6 @@ package com.mose.movie.repository.member;
 
 import com.mose.movie.domain.member.Member;
 import com.mose.movie.domain.member.eMemberJoinType;
-import com.mose.movie.repository.board.BoardRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,26 +17,26 @@ class MemberRepositoryTest {
     @Autowired
     MemberRepository memberRepository;
 
-    @Autowired
-    BoardRepository boardRepository;
+    private final String memberId = "ehaakdl";
+    private final String memberPasswd = "1234";
+    private final String email = "ehaakdl@gamilc.com";
+    private final eMemberJoinType joinType = eMemberJoinType.NORMAL;
+    private final String nickname = "ehaakdl";
+    private final Long point = 0L;
 
     @Test
-    @DisplayName("회원 추가 후 MemberId로 조회 및 값 비교 테스트")
-    void createMember() {
-        Member member = Member.createMember("ehaakdl@gamilc.com",
-                "ehaakdl", 0L, "ehaakdl", "1234", eMemberJoinType.NORMAL);
-        memberRepository.save(member);
+    @DisplayName("회원 아이디 조회")
+    void findMemberId() {
+//        given
+        Member member = Member.createMember(email,
+                memberId, point, nickname, memberPasswd, joinType);
+        member = memberRepository.save(member);
 
-        List<Member> members = memberRepository.findByMemberId("ehaakdl");
-        for (Member member2 : members) {
+//        when
+        List<Member> members = memberRepository.findByMemberId(memberId);
 
-            Assertions.assertThat(member.getMemberId()).isEqualTo(member2.getMemberId());
-            Assertions.assertThat(member.getMemberPasswd()).isEqualTo(member2.getMemberPasswd());
-            Assertions.assertThat(member.getEmail()).isEqualTo(member2.getEmail());
-            Assertions.assertThat(member.getJoinType()).isEqualTo(member2.getJoinType());
-            Assertions.assertThat(member.getNickname()).isEqualTo(member2.getNickname());
-            Assertions.assertThat(member.getPoint()).isEqualTo(member2.getPoint());
-        }
-
+//        then
+        Assertions.assertThat(members.size()).isEqualTo(1);
+        Assertions.assertThat(member).isEqualTo(members.get(0));
     }
 }
