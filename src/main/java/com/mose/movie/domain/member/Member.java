@@ -26,7 +26,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private eMemberJoinType joinType;
 
-    public static Member createMember(final String email, final String memberId
+    public static Member createMemberFromPublicJoin(final String email, final String memberId
             , final Long point, final String nickname
             , final String memberPasswd
             , final eMemberJoinType joinType){
@@ -38,6 +38,20 @@ public class Member {
                 .email(email)
                 .joinType(joinType)
                 .nickname(nickname)
+                .point(point)
+                .build();
+    }
+
+    public static Member createMemberFromSocialJoin(final String email
+                                                    ,final String nickname
+            , final Long point
+            , final eMemberJoinType joinType){
+
+        return Member
+                .builder()
+                .email(email)
+                .nickname(nickname)
+                .joinType(joinType)
                 .point(point)
                 .build();
     }
