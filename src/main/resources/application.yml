@@ -2,6 +2,7 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
   servlet:
     multipart:
       file-size-threshold: 1024MB
@@ -9,7 +10,8 @@ spring:
       max-request-size: 100GB
 
   profiles:
-    active: local
+    active: local-docker
+
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
@@ -49,6 +51,32 @@ logging.level:
 movie:
   path:
     upload: C:\movie\store\
+---
+spring:
+  servlet:
+    multipart:
+      location: C:\movie\temp
+
+  config:
+    activate:
+      on-profile: local-docker
+
+  datasource:
+    #url: ENC(AmjDJqwXWxXbNLxT2tqrt7evRCK8NdAJ/KVEtB7usTsoUzlncqDsMcIiJbPEo2eR7470koIhMEpI1Ut2Ywum/kwxsbK3eM7x) ?? ???
+    url: jdbc:mysql://localhost:3306/movie?serverTimezone=Asia/Seoul
+    username: ENC(5/AhqAagHOPYLAK/ZmVpWQ==)
+    password: ENC(7tcKhS5JXkdK1pfbDxbgHA==)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: none
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        show_sql: false
+        format_sql: true
+        default_batch_fetch_size: 100
+        use_sql_comments: true
+
 ---
 spring:
   config:
