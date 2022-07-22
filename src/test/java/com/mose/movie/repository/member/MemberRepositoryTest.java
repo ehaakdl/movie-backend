@@ -17,23 +17,16 @@ class MemberRepositoryTest {
     @Autowired
     MemberRepository memberRepository;
 
-    private final String memberId = "ehaakdl";
-    private final String memberPasswd = "1234";
-    private final String email = "ehaakdl@gamilc.com";
-    private final eMemberJoinType joinType = eMemberJoinType.NORMAL;
-    private final String nickname = "ehaakdl";
-    private final Long point = 0L;
-
     @Test
     @DisplayName("회원 아이디 조회")
     void findMemberId() {
 //        given
-        Member member = Member.createMember(email,
-                memberId, point, nickname, memberPasswd, joinType);
+        Member member = Member.createMember("ehaakdl",
+                "wqewq", 0L, "nickname", "memberPasswd", eMemberJoinType.NORMAL);
         member = memberRepository.save(member);
 
 //        when
-        List<Member> members = memberRepository.findByMemberId(memberId);
+        List<Member> members = memberRepository.findByMemberId("wqewq");
 
 //        then
         Assertions.assertThat(members.size()).isEqualTo(1);
