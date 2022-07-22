@@ -9,9 +9,10 @@ import javax.persistence.*;
 @Builder(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "member")
 public class Member {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
 
@@ -24,6 +25,7 @@ public class Member {
     private String memberPasswd;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "join_type")
     private eMemberJoinType joinType;
 
     public static Member createMemberFromPublicJoin(final String email, final String memberId

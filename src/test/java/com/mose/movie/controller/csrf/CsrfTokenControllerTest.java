@@ -3,6 +3,7 @@ package com.mose.movie.controller.csrf;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -47,24 +48,24 @@ class CsrfTokenControllerTest {
         headerName = responseJson.get("headerName").getAsString();
     }
 
-    /*토큰을 파라미터에 넣었을 때 정상 작동 하는지 체크*/
     @Test
+    @DisplayName("토큰을 파라미터에 넣었을 때 정상 작동 하는지 체크")
     void requestParamCsrfToken() throws Exception {
         mockMvc
                 .perform(post(TEST_URL).param(parameterName, csrfToken).session(session))
                 .andExpect(status().isOk());
     }
 
-    /*토큰을 헤더에 넣을 떄 정상 작동 체크*/
     @Test
+    @DisplayName("토큰을 헤더에 넣을 떄 정상 작동하는지 체크")
     void requestHeaderCsrfToken() throws Exception {
         mockMvc
                 .perform(post(TEST_URL).header(headerName, csrfToken).session(session))
                 .andExpect(status().isOk());
     }
 
-    /*토큰 헤더에 안 넣을 때 체크*/
     @Test
+    @DisplayName("토큰 헤더에 안넣을 떄")
     void requestNoCsrfToken() throws Exception {
         mockMvc
                 .perform(post(TEST_URL).session(session))

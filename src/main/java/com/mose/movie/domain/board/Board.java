@@ -4,26 +4,24 @@ import com.mose.movie.domain.member.Member;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Entity
 @Builder(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "board")
 public class Board {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "write_date")
-    private LocalDate writeDate;
+    private LocalDateTime writeDate;
 
     @Column(name = "update_date")
-    private LocalDate updateDate;
-
-    @Column(name = "writer_nickname")
-    private String writerNickName;
+    private LocalDateTime updateDate;
 
     private String title;
     private String contents;
@@ -32,8 +30,7 @@ public class Board {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public static Board createBoard(final String writerNickName
-            , final String contents
+    public static Board createBoard(final String contents
             , final String title
             , final Member member){
         return Board
@@ -41,9 +38,8 @@ public class Board {
                 .member(member)
                 .title(title)
                 .contents(contents)
-                .updateDate(LocalDate.now())
-                .writeDate(LocalDate.now())
-                .writerNickName(writerNickName)
+                .updateDate(LocalDateTime.now())
+                .writeDate(LocalDateTime.now())
                 .build();
     }
 }

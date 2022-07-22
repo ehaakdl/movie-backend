@@ -4,11 +4,11 @@ import com.mose.movie.domain.board.Board;
 import com.mose.movie.domain.member.Member;
 import com.mose.movie.domain.member.eMemberJoinType;
 import com.mose.movie.repository.member.MemberRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -18,16 +18,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
+@Rollback(value = false)
 class BoardRepositoryTest {
     @Autowired
     BoardRepository boardRepository;
     @Autowired
     MemberRepository memberRepository;
-
-    @BeforeEach
-    void createBoard(){
-
-    }
 
     @Test
     @DisplayName("게시글 전체 조회")
@@ -43,7 +39,7 @@ class BoardRepositoryTest {
             member = Member.createMemberFromSocialJoin(UUID.randomUUID().toString(), UUID.randomUUID().toString(), 0L, eMemberJoinType.NAVER);
             memberRepository.save(member);
 
-            Board board = Board.createBoard("nickname", "contents", "title", member);
+            Board board = Board.createBoard("contents", "title", member);
             boards[i] = boardRepository.save(board);
         }
 
