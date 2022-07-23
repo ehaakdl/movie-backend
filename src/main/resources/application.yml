@@ -77,6 +77,9 @@ spring:
         default_batch_fetch_size: 100
         use_sql_comments: true
 
+logging.level:
+  org.hibernate.SQL: debug
+
 ---
 spring:
   config:
