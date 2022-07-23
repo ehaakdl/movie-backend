@@ -33,7 +33,8 @@ public class Board {
     public static Board createBoard(final String contents
             , final String title
             , final Member member){
-        return Board
+
+        Board board = Board
                 .builder()
                 .member(member)
                 .title(title)
@@ -41,5 +42,9 @@ public class Board {
                 .updateDate(LocalDateTime.now())
                 .writeDate(LocalDateTime.now())
                 .build();
+
+        member.getBoards().add(board);
+
+        return board;
     }
 }
