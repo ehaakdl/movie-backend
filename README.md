@@ -14,6 +14,10 @@
 
 
 #### [ 기술적인 정리 ]
+
+##### JAVA
+- [equals, hashcode 원리](https://ehaakdl.tistory.com/64)
+- [Optional](https://ehaakdl.tistory.com/18)
 ##### 객체지향
 - [의존관계 역전 원칙(DIP)](https://ehaakdl.tistory.com/41)
 - [인터페이스 분리 원칙](https://ehaakdl.tistory.com/40)
