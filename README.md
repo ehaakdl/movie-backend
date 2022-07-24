@@ -15,9 +15,20 @@
 
 #### [ 기술적인 정리 ]
 
+##### 자료구조
+- [퀵정렬과 메모리 참조 지역화](https://ehaakdl.tistory.com/65)
+- [선택/삽입 정렬 구현및 비교](https://ehaakdl.tistory.com/28)
+
+
 ##### 네트워크
 - [TCP 통신 과정](https://ehaakdl.tistory.com/63)
 
+##### Rest Api
+- [REST API 설계](https://ehaakdl.tistory.com/59)
+
+
+##### was
+- [Servlet](https://ehaakdl.tistory.com/62)
 
 ##### Spring
 - [빈 생명 주기](https://ehaakdl.tistory.com/52)
@@ -36,6 +47,8 @@
 
 ##### DB
 - [정규화](https://ehaakdl.tistory.com/66)
+- [트랜잭션](https://ehaakdl.tistory.com/26)
+- [트랜잭션 격리성](https://ehaakdl.tistory.com/25)
 
 ##### JPA
 - [영속/준영속 상태, 변경감지](https://ehaakdl.tistory.com/61)
