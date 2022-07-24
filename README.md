@@ -1,23 +1,26 @@
 ### 아직 미완성 입니다.
 
-#### [ 프로젝트 목적 ]
+<details><summary>프로젝트 목적</summary>
 
-1. 스트리밍 서비스를 통해 대용량 트래픽을 경험
-2. Junit 을 이용한 능숙한 테스트 케이스 작성
-3. JPA 기술 숙달  
+  1. 스트리밍 서비스를 통해 대용량 트래픽을 경험
+  2. Junit 을 이용한 능숙한 테스트 케이스 작성
+  3. JPA 기술 숙달  
+
+</details>
 
 #### [ 버전 ]
 - [버전 목록](https://github.com/ehaakdl/movie/wiki/%EB%B2%84%EC%A0%84)
 
-#### [ 서비스 ]
-1. RED5 스트리밍 서버를 이용하여 스트리밍 서비스 구현 
-2. 게시글 서비스 와 연동하여 영화 시청에 대해 판매 가능
-3. 소셜 로그인 구현
+<details><summary>서비스</summary>
 
+  1. RED5 스트리밍 서버를 이용하여 스트리밍 서비스 구현 
+  2. 게시글 서비스 와 연동하여 영화 시청에 대해 판매 가능
+  3. 소셜 로그인 구현
 
+</details>
 
-#### [ 기술적인 정리 ]
-
+<details><summary>기술 정리</summary>
+  
 ##### 자료구조
 - [퀵정렬과 메모리 참조 지역화](https://ehaakdl.tistory.com/65)
 - [선택/삽입 정렬 구현및 비교](https://ehaakdl.tistory.com/28)
@@ -57,8 +60,13 @@
 - [영속/준영속 상태, 변경감지](https://ehaakdl.tistory.com/61)
 - [연관관계 지연로딩하는 이유](https://ehaakdl.tistory.com/58)
 - [양방향 관계에서 연관관계 주인은 누구인가?](https://ehaakdl.tistory.com/57)
-#### [ ERD ]
-<img width="482" alt="image" src="https://user-images.githubusercontent.com/6407466/180637555-85a825e9-946d-4e06-89db-437ba8de1276.png">
+  
+</details>
+
+<details><summary>ERD</summary>
+
+  <img width="482" alt="image" src="https://user-images.githubusercontent.com/6407466/180637555-85a825e9-946d-4e06-89db-437ba8de1276.png">
+</details>
 
 
 
