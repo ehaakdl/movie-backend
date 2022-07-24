@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 
+import static com.mose.movie.domain.board.eBoardType.STREAM;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -89,8 +90,8 @@ class MemberRepositoryTest {
         Member publicJoin = createMember(eMemberJoinType.NORMAL);
         Member socialJoin = createMember(eMemberJoinType.NAVER);
 
-        Board boardByPublicJoin = boardRepository.save(Board.createBoard("contents", "title", publicJoin));
-        Board boardBySocialJoin = boardRepository.save(Board.createBoard("contents", "title", socialJoin));
+        Board boardByPublicJoin = boardRepository.save(Board.createBoard("contents", "title", publicJoin, STREAM));
+        Board boardBySocialJoin = boardRepository.save(Board.createBoard("contents", "title", socialJoin, STREAM));
 
         //          when
         memberRepository.delete(socialJoin);
