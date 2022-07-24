@@ -14,7 +14,7 @@
 
 
 <h3> [ 기술적인 정리 ] </h3>
-[정규화](https://ehaakdl.tistory.com/66)
+[정규화][https://ehaakdl.tistory.com/66]
 
 <h3> [ ERD ] </h3>
 <img width="482" alt="image" src="https://user-images.githubusercontent.com/6407466/180637555-85a825e9-946d-4e06-89db-437ba8de1276.png">
