@@ -1,6 +1,5 @@
-### 아직 미완성 입니다.
-
-<details><summary>프로젝트 목적</summary>
+#### 현재 진행 중
+<details><summary><b>프로젝트 목적</b></summary>
 
   1. 스트리밍 서비스를 통해 대용량 트래픽을 경험
   2. Junit 을 이용한 능숙한 테스트 케이스 작성
@@ -8,10 +7,12 @@
 
 </details>
 
-#### [ 버전 ]
-- [버전 목록](https://github.com/ehaakdl/movie/wiki/%EB%B2%84%EC%A0%84)
+<details><summary><b>버전 목록</b></summary>
 
-<details><summary>서비스</summary>
+  - [버전 목록](https://github.com/ehaakdl/movie/wiki/%EB%B2%84%EC%A0%84)
+</details>
+  
+<details><summary><b>서비스</b></summary>
 
   1. RED5 스트리밍 서버를 이용하여 스트리밍 서비스 구현 
   2. 게시글 서비스 와 연동하여 영화 시청에 대해 판매 가능
@@ -19,7 +20,7 @@
 
 </details>
 
-<details><summary>기술 정리</summary>
+<details><summary><b>기술 정리</b></summary>
   
 ##### 자료구조
 - [퀵정렬과 메모리 참조 지역화](https://ehaakdl.tistory.com/65)
@@ -63,7 +64,7 @@
   
 </details>
 
-<details><summary>ERD</summary>
+<details><summary><b>ERD</b></summary>
 
   <img width="482" alt="image" src="https://user-images.githubusercontent.com/6407466/180637555-85a825e9-946d-4e06-89db-437ba8de1276.png">
 </details>
