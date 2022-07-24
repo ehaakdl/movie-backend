@@ -14,6 +14,13 @@
 
 
 #### [ 기술적인 정리 ]
+##### 객체지향
+- [의존관계 역전 원칙(DIP)](https://ehaakdl.tistory.com/41)
+- [인터페이스 분리 원칙](https://ehaakdl.tistory.com/40)
+- [리스코프 치환 원칙(LSP)](https://ehaakdl.tistory.com/39)
+- [개방-폐쇄 원칙(OCP)](https://ehaakdl.tistory.com/38)
+- [단일책임 원칙(SRP)](https://ehaakdl.tistory.com/37)
+
 ##### DB
 - [정규화](https://ehaakdl.tistory.com/66)
 
