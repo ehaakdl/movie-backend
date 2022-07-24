@@ -23,6 +23,10 @@ public class Board {
     @Column(name = "update_date")
     private LocalDateTime updateDate;
 
+    @Column(name = "board_type")
+    @Enumerated(EnumType.STRING)
+    private eBoardType eBoardType;
+
     private String title;
     private String contents;
 
@@ -32,11 +36,13 @@ public class Board {
 
     public static Board createBoard(final String contents
             , final String title
-            , final Member member){
+            , final Member member
+            , final eBoardType boardType){
 
         Board board = Board
                 .builder()
                 .member(member)
+                .eBoardType(boardType)
                 .title(title)
                 .contents(contents)
                 .updateDate(LocalDateTime.now())
