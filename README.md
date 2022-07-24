@@ -15,6 +15,15 @@
 
 #### [ 기술적인 정리 ]
 
+##### 네트워크
+- [TCP 통신 과정](https://ehaakdl.tistory.com/63)
+
+
+##### Spring
+- [빈 생명 주기](https://ehaakdl.tistory.com/52)
+- [의존관계 주입](https://ehaakdl.tistory.com/50)
+- [수동 빈,자동 빈](https://ehaakdl.tistory.com/51)
+
 ##### JAVA
 - [equals, hashcode 원리](https://ehaakdl.tistory.com/64)
 - [Optional](https://ehaakdl.tistory.com/18)
