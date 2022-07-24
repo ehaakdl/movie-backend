@@ -14,8 +14,13 @@
 
 
 #### [ 기술적인 정리 ]
-[정규화][https://ehaakdl.tistory.com/66]
+##### DB
+- [정규화](https://ehaakdl.tistory.com/66)
 
+##### JPA
+- [영속/준영속 상태, 변경감지](https://ehaakdl.tistory.com/61)
+- [연관관계 지연로딩하는 이유](https://ehaakdl.tistory.com/58)
+- [양방향 관계에서 연관관계 주인은 누구인가?](https://ehaakdl.tistory.com/57)
 #### [ ERD ]
 <img width="482" alt="image" src="https://user-images.githubusercontent.com/6407466/180637555-85a825e9-946d-4e06-89db-437ba8de1276.png">
 
