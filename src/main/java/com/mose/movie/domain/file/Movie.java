@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @DiscriminatorValue("STREAM")
 @Getter
 @Table(name = "File")
-public class movie extends File{
-    @Column("stream_link")
+public class Movie extends File{
+    @Column(name = "stream_link")
     private String streamLink;
 }
