@@ -1,81 +1,25 @@
+app:
+  secret-key: ${JWT_SECRET_KEY}
+
 server:
   error:
     whitelabel:
       enabled: false
 
-# spy db log
-decorator:
-  datasource:
-    p6spy:
-      enable-logging: true
-
 spring:
-  output:
-    ansi:
-      enabled: always
-# mail
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: ${MAIL_ID}
-    password: ${MAIL_PASSWORD}
-    properties:
-      mail:
-        smtp:
-          auth: true
-          timeout: 5000
-          starttls:
-            enable: true
-
-  mvc:
-    converters:
-      preferred-json-mapper: gson
-    static-path-pattern: /static/**
-
-  thymeleaf:
-    prefix: classpath:/templates/
-    suffix: .html
-    cache: false
-
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: 843307007567-4dhsploof6dmgbqtmqnkltf7ck2v2skp.apps.googleusercontent.com
-            client-secret: ${OAUTH_GOOGLE_CLIENT_SECRET}
-            scope:
-              - profile
-              - email
-# jpa
-  datasource:
-    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?serverTimezone=UTC&characterEncoding=UTF-8
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
- 
-  jpa:
-    show_sql: false
-    database: mysql
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
-
+    application:
+        name: backend
+    output:
+        ansi:
+            enabled: always
+        
 # swagger
 springdoc:
-  api-docs:
-    path: /docs
-
-  swagger-ui:
-    path: /swagger-ui
-    display-request-duration: true
-
-  cache:
-    disabled: true
-  paths-to-match: /api/v1/**
-#    todo 기본 에러페이지 추가
-
-app:
-  version: 1.0.0
-  secret-key: ${JWT_SECRET_KEY}
+    api-docs:
+        path: /docs
+    swagger-ui:
+        path: /swagger-ui
+        display-request-duration: true
+    cache:
+        disabled: true
+    paths-to-match: /api/v1/**
