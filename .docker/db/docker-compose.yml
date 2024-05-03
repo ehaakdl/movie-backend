@@ -1,0 +1,24 @@
+version: '3'
+services:
+  db:
+    image: mysql:8.0.32
+    container_name: db
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_ROOT_HOST: ${MYSQL_ROOT_HOST}
+      TZ: ${MYSQL_TIME_ZONE}
+    ports:
+      - 3306:3306
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d
+      # - ./data/mysql:/var/lib/mysql --user 1000
+      - ./conf/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - movie-net
+
+networks:
+  movie-net:
+    driver: bridge

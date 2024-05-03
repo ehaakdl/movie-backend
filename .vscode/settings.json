@@ -1,0 +1,10 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    // 자동 지연 저장
+    "files.autoSave": "afterDelay",
+    "editor.codeActionsOnSave": [
+        // import 코드 자동정리
+        "source.organizeImports"
+    ]
+}

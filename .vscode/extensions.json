@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "exodiusstudios.comment-anchors",
+        "intellsmi.comment-translate",
+        "vscjava.vscode-java-debug",
+        "vscjava.vscode-java-pack",
+        "mhutchie.git-graph",
+        "vscjava.vscode-gradle",
+        "redhat.java"
+    ]
+}
