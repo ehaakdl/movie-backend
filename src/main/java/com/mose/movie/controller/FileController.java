@@ -17,22 +17,10 @@ import java.util.List;
 @RestController
 @Slf4j
 public class FileController {
-    private final FileService fileService;
+    @PostMapping("/test")
+    public String test() {
 
-    public FileController(@Qualifier("FileServiceImpl") FileService fileService) {
-        this.fileService = fileService;
-    }
-
-    @PostMapping(Urls.FILE_UPLOAD)
-    public ResponseEntity<ResponseDTO> upload(@RequestPart(ParameterNm.FILE) MultipartFile file) {
-//        fileService.upload(files);
-        return null;
-    }
-
-    @PostMapping(Urls.FILE_DOWNLOAD)
-    public List<String> download(HttpSession session, @RequestPart(ParameterNm.FILE) MultipartFile file) {
-
-        return null;
+        return "test";
     }
 
 }
