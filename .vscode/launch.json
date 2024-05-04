@@ -29,7 +29,12 @@
                 "MAIL_PASSWORD": "ttzmfovyjcmranax",
                 "MAIL_ID": "ehaakdl@gmail.com",
                 "OAUTH_GOOGLE_CLIENT_SECRET": "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",
-                "SHCEDULER_POOL_SIZE": 3
+                "SHCEDULER_THREAD_POOL_SIZE": 3,
+                "KOBIS_BASE_URL": "http//www.kobis.or.kr",
+                "KOBIS_MOVIE_INFO_URL": "/kobisopenapi/webservice/rest/movie/searchMovieInfo.json",
+                "KOBIS_MOVIE_WEEKLY_INFO_URL": "/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList",
+                "KOBIS_API_KEY": "42be47faceaf27d7e6a8244bb6a36f64"
+
             }
         },
     ]

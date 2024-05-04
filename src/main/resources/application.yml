@@ -1,6 +1,15 @@
 app:
-  secret-key: ${JWT_SECRET_KEY}
+    secret-key: ${JWT_SECRET_KEY}
+        
 
+scheduler:
+    thread-pool-size: ${SHCEDULER_THREAD_POOL_SIZE}
+    kobis:
+        base-url: ${KOBIS_BASE_URL}
+        movie-weekly-info-url: ${KOBIS_MOVIE_WEEKLY_INFO_URL}
+        movie-info-url: ${KOBIS_MOVIE_INFO_URL}
+        api-key: ${KOBIS_API_KEY}
+        
 logging:
   level:
     root: info

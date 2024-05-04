@@ -26,9 +26,10 @@ public class User {
     @Column
     private String password;
 
-    public static User createSocialUser(String email) {
+    public static User create(String email) {
         return User.builder()
                 .email(email)
+                .password(email)
                 .build();
     }
 }

@@ -1,5 +1,6 @@
 package com.movie.backend.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
@@ -9,13 +10,14 @@ import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 @EnableScheduling
 @Configuration
 public class ShcedulerConfig implements SchedulingConfigurer{
-    private final int POOL_SIZE = Integer.parseInt(System.getenv("SHCEDULER_POOL_SIZE"));
+    @Value("${scheduler.thread-pool-size}")
+    private int threadPoolSize;
 
     @Override
     public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
         ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
 
-        threadPoolTaskScheduler.setPoolSize(POOL_SIZE);
+        threadPoolTaskScheduler.setPoolSize(threadPoolSize);
         threadPoolTaskScheduler.setThreadNamePrefix("scheduled-task-pool-");
         threadPoolTaskScheduler.initialize();
 
