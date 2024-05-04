@@ -28,7 +28,8 @@
                 "JWT_SECRET_KEY": "a89e2da3-704d-4ff0-a803-c8d8dc57cbf1",
                 "MAIL_PASSWORD": "ttzmfovyjcmranax",
                 "MAIL_ID": "ehaakdl@gmail.com",
-                "OAUTH_GOOGLE_CLIENT_SECRET": "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"
+                "OAUTH_GOOGLE_CLIENT_SECRET": "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",
+                "SHCEDULER_POOL_SIZE": 3
             }
         },
     ]
