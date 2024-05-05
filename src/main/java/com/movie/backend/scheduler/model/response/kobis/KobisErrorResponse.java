@@ -1,9 +1,6 @@
 package com.movie.backend.scheduler.model.response.kobis;
 
-import java.util.Optional;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.AllArgsConstructor;

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.movie.backend.model.entity.User;
+import com.movie.backend.model.entity.UserEntity;
 import com.movie.backend.model.request.TestRequest;
 import com.movie.backend.repository.CustomRepository;
 import com.movie.backend.repository.UserRepository;
@@ -26,7 +26,7 @@ public class TestController {
 
     @GetMapping("/api/v1/test")
     public String test() {
-        User user = userRepository.findByEmail("test").orElseThrow(() -> new RuntimeException());
+        UserEntity user = userRepository.findByEmail("test").orElseThrow(() -> new RuntimeException());
         return user.getEmail();
     }
 

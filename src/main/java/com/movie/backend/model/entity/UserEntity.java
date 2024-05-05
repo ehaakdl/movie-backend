@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,8 +26,8 @@ public class User {
     @Column
     private String password;
 
-    public static User create(String email) {
-        return User.builder()
+    public static UserEntity create(String email) {
+        return UserEntity.builder()
                 .email(email)
                 .password(email)
                 .build();

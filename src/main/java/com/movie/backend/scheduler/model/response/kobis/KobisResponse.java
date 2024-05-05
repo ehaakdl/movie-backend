@@ -1,9 +1,5 @@
 package com.movie.backend.scheduler.model.response.kobis;
 
-import java.util.Optional;
-
-import javax.swing.text.html.Option;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
