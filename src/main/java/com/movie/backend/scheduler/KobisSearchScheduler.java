@@ -48,6 +48,8 @@ public class KobisSearchScheduler {
 
                 KobisResponse movies = KobisResponse.readJson(body);
                 if (movies == null) {
+                        // TODO 에러 케이스 처리
+                        // api 호출 횟수 제한
                         KobisErrorResponse errorResponse = KobisErrorResponse.readJson(body);
                         assert errorResponse != null;
                         throw new MovieSearchFailException(errorResponse);
