@@ -2,7 +2,7 @@ package com.movie.backend.repository;
 
 import org.springframework.stereotype.Repository;
 
-import com.movie.backend.model.entity.QUser;
+import com.movie.backend.model.entity.QUserEntity;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import lombok.RequiredArgsConstructor;
@@ -14,10 +14,10 @@ public class CustomRepository {
 
     public boolean test(String email) {
 
-        return jpaQueryFactory.select(QUser.user.email)
-                .from(QUser.user)
+        return jpaQueryFactory.select(QUserEntity.userEntity.email)
+                .from(QUserEntity.userEntity)
                 .where(
-                        QUser.user.email.eq(email))
+                    QUserEntity.userEntity.email.eq(email))
                 .limit(1)
                 .fetchOne() != null;
     }

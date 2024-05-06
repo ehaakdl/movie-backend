@@ -30,3 +30,27 @@ COLLATE='utf8mb4_0900_ai_ci'
 ENGINE=InnoDB
 ;
 
+CREATE TABLE `movie` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`api_provider_type` VARCHAR(100) NOT NULL DEFAULT '0' COMMENT 'api 제공자\r\n- kobis' COLLATE 'utf8mb4_0900_ai_ci',
+	`kobis_movie_code` VARCHAR(100) NULL DEFAULT '0' COMMENT '영화 코드' COLLATE 'utf8mb4_0900_ai_ci',
+	`kobis_movie_name` VARCHAR(100) NULL DEFAULT '0' COMMENT '영화명' COLLATE 'utf8mb4_0900_ai_ci',
+	`kobis_movie_name_en` VARCHAR(100) NULL DEFAULT '0' COMMENT '영어 영화명' COLLATE 'utf8mb4_0900_ai_ci',
+	`kobis_movie_product_year` VARCHAR(4) NULL DEFAULT '0' COMMENT '영화 제작년도' COLLATE 'utf8mb4_0900_ai_ci',
+	`kobis_movie_open_date` VARCHAR(8) NULL DEFAULT '0' COMMENT '개봉일(yyyymmdd)' COLLATE 'utf8mb4_0900_ai_ci',
+	`kobis_movie_type` VARCHAR(20) NULL DEFAULT '0' COMMENT '영화유형\r\nex) 장편' COLLATE 'utf8mb4_0900_ai_ci',
+	`kobis_movie_product_status` VARCHAR(20) NULL DEFAULT '0' COMMENT '제작상태(prdtStatNm)' COLLATE 'utf8mb4_0900_ai_ci',
+	`kobis_movie_genre` VARCHAR(50) NULL DEFAULT '0' COMMENT '전체장르' COLLATE 'utf8mb4_0900_ai_ci',
+	`kobis_rep_genre_name` VARCHAR(50) NULL DEFAULT '0' COMMENT '대표장르' COLLATE 'utf8mb4_0900_ai_ci',
+	`kobis_director_name` VARCHAR(50) NULL DEFAULT '0' COMMENT '영화감독명' COLLATE 'utf8mb4_0900_ai_ci',
+	`created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`deleted_at` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`id`) USING BTREE
+)
+COMMENT='제공받은 영화 정보를 담는 테이블\r\n현재 kobis에서 조회한 영화정보만 담는다.'
+COLLATE='utf8mb4_0900_ai_ci'
+ENGINE=InnoDB
+;
+
+
