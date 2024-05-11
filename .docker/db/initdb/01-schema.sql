@@ -46,11 +46,13 @@ CREATE TABLE `movie` (
 	`created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	`deleted_at` DATETIME NULL DEFAULT NULL,
-	PRIMARY KEY (`id`) USING BTREE
+	PRIMARY KEY (`id`) USING BTREE,
+	UNIQUE INDEX `kobis_movie_code` (`kobis_movie_code`) USING BTREE
 )
 COMMENT='제공받은 영화 정보를 담는 테이블\r\n현재 kobis에서 조회한 영화정보만 담는다.'
 COLLATE='utf8mb4_0900_ai_ci'
 ENGINE=InnoDB
 ;
+
 
 
