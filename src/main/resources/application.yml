@@ -26,6 +26,18 @@ server:
       enabled: false
 
 spring:
+    # mail 발송 속성
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: ${MAIL_ID}
+        password: ${MAIL_PASSWORD}
+        properties:
+            mail.smtp.auth: true
+            mail.smtp.connectiontimeout: 5000
+            mail.smtp.timeout: 5000
+            mail.smtp.starttls.enable: true
+
     application:
         name: backend
     output:

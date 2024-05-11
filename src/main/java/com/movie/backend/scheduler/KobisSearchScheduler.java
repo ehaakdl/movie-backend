@@ -7,22 +7,18 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.movie.backend.repository.MovieRepository;
 import com.movie.backend.scheduler.exception.MovieSearchFailException;
 import com.movie.backend.scheduler.model.response.kobis.KobisErrorResponse;
 import com.movie.backend.scheduler.model.response.kobis.KobisMoviesResponse;
 import com.movie.backend.scheduler.model.response.kobis.KobisResponse;
 import com.movie.backend.scheduler.service.KobisMovieService;
-import com.movie.backend.scheduler.utils.mapper.MovieMapper;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 // 초(0-59)   분(0-59)　　시간(0-23)　　일(1-31)　　월(1-12)　　요일(0-7) 
 // 요일은 * 대신 ?가능
 // https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions
 @Component
-@Slf4j
 @RequiredArgsConstructor
 public class KobisSearchScheduler {
         @Value("${scheduler.kobis.base-url}")
@@ -69,6 +65,5 @@ public class KobisSearchScheduler {
                 }
 
                 kobisMovieService.saveMovies(moviesResponse.getMovies());
-                throw new RuntimeException();
         }
 }
