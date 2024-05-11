@@ -1,5 +1,7 @@
 package com.movie.backend.model.entity;
 
+import com.movie.backend.model.entity.audit.AuditEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -8,17 +10,18 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
-@Builder
 @Table(name = "movie")
 @Entity
-public class MovieEntity extends BaseEntity {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class MovieEntity extends AuditEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

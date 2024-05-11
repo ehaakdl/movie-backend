@@ -1,4 +1,4 @@
-package com.movie.backend.model.entity;
+package com.movie.backend.model.entity.audit;
 
 import java.util.Date;
 
@@ -14,16 +14,19 @@ import lombok.Getter;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @Getter
-public class BaseEntity {
+public class AuditEntity {
     @CreatedDate
     @Column
     private Date createdAt;
 
-    // TODO 수정할때 갱신 체크 필요
     @LastModifiedDate
     @Column
     private Date updatedAt;
 
     @Column
     private Date deletedAt;
+
+    public void delete(){
+        this.deletedAt = new Date();
+    }
 }
