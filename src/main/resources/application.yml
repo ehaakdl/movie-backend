@@ -9,7 +9,13 @@ scheduler:
         movie-weekly-info-url: ${KOBIS_MOVIE_WEEKLY_INFO_URL}
         movie-info-url: ${KOBIS_MOVIE_INFO_URL}
         api-key: ${KOBIS_API_KEY}
-        
+
+# p6spy log 작동 속성
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true
+
 logging:
   level:
     root: info
@@ -34,11 +40,10 @@ spring:
 
  
     jpa:
-        show_sql: false
         database: mysql
         properties:
             hibernate:
-            dialect: org.hibernate.dialect.MySQLDialect
+                dialect: org.hibernate.dialect.MySQL8Dialect
 # swagger
 springdoc:
     api-docs:
