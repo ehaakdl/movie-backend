@@ -53,9 +53,7 @@ spring:
  
     jpa:
         database: mysql
-        properties:
-            hibernate:
-                dialect: org.hibernate.dialect.MySQL8Dialect
+        
 # swagger
 springdoc:
     api-docs:
