@@ -13,7 +13,8 @@ import com.movie.backend.scheduler.model.response.kobis.KobisMovieResponse;
         KobisDirectorResponse.class,
         KobisCompanyResponse.class
 })
-public interface MovieEntityMapper {
+public interface MovieMapper {
+    // TODO response 벌크처리
     @Mapping(source = "response.movieCd", target = "kobisMovieCode")
     @Mapping(source = "response.movieNm", target = "kobisMovieName")
     @Mapping(source = "response.movieNmEn", target = "kobisMovieNameEn")

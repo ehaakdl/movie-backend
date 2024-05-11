@@ -1,7 +1,5 @@
 package com.movie.backend.scheduler;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -9,15 +7,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.movie.backend.model.entity.MovieEntity;
-import com.movie.backend.model.entity.eMovieApiProviderType;
 import com.movie.backend.repository.MovieRepository;
-import com.movie.backend.repository.UserRepository;
 import com.movie.backend.scheduler.exception.MovieSearchFailException;
 import com.movie.backend.scheduler.model.response.kobis.KobisErrorResponse;
 import com.movie.backend.scheduler.model.response.kobis.KobisMoviesResponse;
 import com.movie.backend.scheduler.model.response.kobis.KobisResponse;
-import com.movie.backend.scheduler.utils.mapper.MovieEntityMapper;
+import com.movie.backend.scheduler.service.KobisMovieService;
+import com.movie.backend.scheduler.utils.mapper.MovieMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,8 +36,7 @@ public class KobisSearchScheduler {
 
         private static final String KOBIS_QUERY_PARAM_KEY = "key";
 
-        private final MovieEntityMapper movieEntityMapper;
-        private final MovieRepository movieRepository;
+        private final KobisMovieService kobisMovieService;
 
         @Scheduled(cron = "* * * * * *")
         @Transactional
@@ -73,12 +68,7 @@ public class KobisSearchScheduler {
                         throw new RuntimeException();
                 }
 
-                List<MovieEntity> movieEntities = moviesResponse.getMovies().stream()
-                                .map(movie -> movieEntityMapper.toMovieEntity(movie, eMovieApiProviderType.kobis))
-                                .toList();
-
-                // TODO 데이터 중복체크
-                // TODO 테이블에서 유니크키 적용 검토
-                movieRepository.saveAll(movieEntities);
+                kobisMovieService.saveMovies(moviesResponse.getMovies());
+                throw new RuntimeException();
         }
 }
