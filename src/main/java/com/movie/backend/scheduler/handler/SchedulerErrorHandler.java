@@ -1,4 +1,4 @@
-package com.movie.backend.scheduler;
+package com.movie.backend.scheduler.handler;
 
 import org.springframework.stereotype.Component;
 import org.springframework.util.ErrorHandler;

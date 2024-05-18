@@ -9,15 +9,15 @@ import com.movie.backend.model.entity.notice.NoticeEntity;
 import com.movie.backend.model.entity.notice.eNoticeType;
 import com.movie.backend.model.vo.EmailMessageVO;
 import com.movie.backend.repository.NoticeRepository;
-import com.movie.backend.service.EmailService;
+import com.movie.backend.service.EmailSendService;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class EmailNoticeServiceImpl implements NoticeService {
+public class EmailNoticeService {
     private final NoticeRepository noticeRepository;
-    private final EmailService emailService;
+    private final EmailSendService emailService;
 
     @Transactional
     public void notice() {

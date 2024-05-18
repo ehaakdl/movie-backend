@@ -3,12 +3,19 @@ app:
         
 
 scheduler:
+    task:
+        kobis-movie-search:
+            cron: ${KOBIS_MOVIE_SEARCH_TASK_CRON:-}
+        movie-notice:
+            cron: ${MOVIE_NOTICE_TASK_CRON:-}
     thread-pool-size: ${SHCEDULER_THREAD_POOL_SIZE}
-    kobis:
-        base-url: ${KOBIS_BASE_URL}
-        movie-weekly-info-url: ${KOBIS_MOVIE_WEEKLY_INFO_URL}
-        movie-info-url: ${KOBIS_MOVIE_INFO_URL}
-        api-key: ${KOBIS_API_KEY}
+
+# kobis 사 api 정보
+kobis:
+    base-url: ${KOBIS_BASE_URL}
+    movie-weekly-info-url: ${KOBIS_MOVIE_WEEKLY_INFO_URL}
+    movie-info-url: ${KOBIS_MOVIE_INFO_URL}
+    api-key: ${KOBIS_API_KEY}
 
 # p6spy log 작동 속성
 decorator:

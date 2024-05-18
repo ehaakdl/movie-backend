@@ -21,20 +21,20 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class KobisSearchScheduler {
-        @Value("${scheduler.kobis.base-url}")
+        @Value("${kobis.base-url}")
         private String kobisBaseUrl;
-        @Value("${scheduler.kobis.api-key}")
+        @Value("${kobis.api-key}")
         private String kobisApiKey;
-        @Value("${scheduler.kobis.movie-weekly-info-url}")
+        @Value("${kobis.movie-weekly-info-url}")
         private String kobisMovieWeeklySearchUrl;
-        @Value("${scheduler.kobis.movie-info-url}")
+        @Value("${kobis.movie-info-url}")
         private String kobisMovieInfoSearchUrl;
 
         private static final String KOBIS_QUERY_PARAM_KEY = "key";
 
         private final KobisMovieService kobisMovieService;
 
-        @Scheduled(cron = "* * * * * *")
+        @Scheduled(cron = "${scheduler.task.kobis-movie-search.cron}")
         @Transactional
         public void movieInfoCollectionJob() {
                 String url = UriComponentsBuilder.fromHttpUrl(kobisBaseUrl)

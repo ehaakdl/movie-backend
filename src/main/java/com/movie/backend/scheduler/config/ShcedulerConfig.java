@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
-import com.movie.backend.scheduler.SchedulerErrorHandler;
+import com.movie.backend.scheduler.handler.SchedulerErrorHandler;
 
 import lombok.RequiredArgsConstructor;
 

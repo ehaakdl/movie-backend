@@ -4,7 +4,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.movie.backend.service.notice.EmailNoticeServiceImpl;
+import com.movie.backend.service.notice.EmailNoticeService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,11 +13,11 @@ import lombok.RequiredArgsConstructor;
 // https://spring.io/blog/2020/11/10/new-in-spring-5-3-improved-cron-expressions
 @Component
 @RequiredArgsConstructor
-public class NoticeScheduler {
+public class MovieNoticeScheduler {
 
-        private final EmailNoticeServiceImpl emailNoticeService;
+        private final EmailNoticeService emailNoticeService;
 
-        @Scheduled(cron = "* * * * * *")
+        @Scheduled(cron = "${scheduler.task.movie-notice.cron}")
         @Transactional
         public void notice() {
                 emailNoticeService.notice();
