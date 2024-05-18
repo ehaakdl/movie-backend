@@ -1,8 +1,11 @@
-package com.movie.backend.model.entity;
+package com.movie.backend.model.entity.movie;
 
+import com.movie.backend.model.convert.KobisMovieProductStatusConvert;
+import com.movie.backend.model.entity.eMovieApiProviderType;
 import com.movie.backend.model.entity.audit.AuditEntity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -49,7 +52,8 @@ public class MovieEntity extends AuditEntity {
     private String kobisMovieType;
 
     @Column
-    private String kobisMovieProductStatus;
+    @Convert(converter = KobisMovieProductStatusConvert.class)
+    private eKobisMovieProductStatus kobisMovieProductStatus;
 
     @Column
     private String kobisMovieGenre;

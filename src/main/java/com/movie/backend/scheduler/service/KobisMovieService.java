@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.movie.backend.model.entity.MovieEntity;
 import com.movie.backend.model.entity.eMovieApiProviderType;
+import com.movie.backend.model.entity.movie.MovieEntity;
 import com.movie.backend.repository.MovieRepository;
 import com.movie.backend.scheduler.model.response.kobis.KobisMovieResponse;
 import com.movie.backend.scheduler.utils.mapper.MovieMapper;
@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 public class KobisMovieService {
     private final MovieRepository movieRepository;
     private final MovieMapper movieMapper;
-
     private List<KobisMovieResponse> findUniqueMovie(List<KobisMovieResponse> target) {
         return target.stream().filter(movie -> !movieRepository.existsByKobisMovieCode(movie.getMovieCd())).toList();
     }

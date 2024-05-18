@@ -2,9 +2,11 @@ package com.movie.backend.scheduler.utils.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 
-import com.movie.backend.model.entity.MovieEntity;
 import com.movie.backend.model.entity.eMovieApiProviderType;
+import com.movie.backend.model.entity.movie.MovieEntity;
+import com.movie.backend.model.entity.movie.eKobisMovieProductStatus;
 import com.movie.backend.scheduler.model.response.kobis.KobisCompanyResponse;
 import com.movie.backend.scheduler.model.response.kobis.KobisDirectorResponse;
 import com.movie.backend.scheduler.model.response.kobis.KobisMovieResponse;
@@ -21,11 +23,16 @@ public interface MovieMapper {
     @Mapping(source = "response.prdtYear", target = "kobisMovieProductYear")
     @Mapping(source = "response.openDt", target = "kobisMovieOpenDate")
     @Mapping(source = "response.typeNm", target = "kobisMovieType")
-    @Mapping(source = "response.prdtStatNm", target = "kobisMovieProductStatus")
+    @Mapping(source = "response.prdtStatNm", target = "kobisMovieProductStatus", qualifiedByName = "convertToKobisProductStatus")
     @Mapping(source = "response.genreAlt", target = "kobisMovieGenre")
     @Mapping(source = "response.repGenreNm", target = "kobisRepGenreName")
     @Mapping(source = "type", target = "apiProviderType")
     // TODO director, company 맵핑 필요
     MovieEntity toMovieEntity(KobisMovieResponse response, eMovieApiProviderType type);
+
+    @Named("convertToKobisProductStatus") 
+    public static eKobisMovieProductStatus convertToKobisProductStatus(String productStatus) { 
+        return eKobisMovieProductStatus.ofResponseProductStatus(productStatus); 
+    }
 
 }

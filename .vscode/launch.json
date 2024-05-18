@@ -35,7 +35,7 @@
                 "KOBIS_MOVIE_INFO_URL": "/kobisopenapi/webservice/rest/movie/searchMovieList.json",
                 "KOBIS_MOVIE_WEEKLY_INFO_URL": "/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json",
                 "KOBIS_API_KEY": "42be47faceaf27d7e6a8244bb6a36f64",
-                "KOBIS_MOVIE_SEARCH_TASK_CRON": "-",
+                "KOBIS_MOVIE_SEARCH_TASK_CRON": "1 * * * * *",
                 "MOVIE_NOTICE_TASK_CRON": "-"
             }
         },
