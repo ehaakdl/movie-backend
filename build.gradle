@@ -76,7 +76,7 @@ jib{
 		image='openjdk:17-ea-slim-buster'
 	}
 	to {
-		image='movie-backend'
+		image='ehaakdl/movie-backend'
 		tags=[version]
 	}
 	

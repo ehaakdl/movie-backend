@@ -14,6 +14,13 @@ docker rmi movie-backend:latest movie-backend:1.0.0
 
 ```
 ./gradlew build jibDockerBuild
+./gradlew --exclude-task test build jibDockerBuild
+```
+
+## Docker hub 주의사항
+```
+이미지 이름은 해당 포멧을 지켜야한다. (안지키면 안올라감)
+포멧: {계정명}/{이미지이름}
 ```
 
 ## 디비 띄우기
