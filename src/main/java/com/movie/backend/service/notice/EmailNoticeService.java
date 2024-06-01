@@ -30,4 +30,13 @@ public class EmailNoticeService {
         });
     }
 
+    @Transactional
+    public void saveNotificationMethod(String email) {
+        if(noticeRepository.existsByEmail(email)){
+            throw new AlreadyRegisterEmailException(email);
+        }
+        
+        noticeRepository.save(NoticeEntity.createEmailNotification(email));
+    }
+
 }

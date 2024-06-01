@@ -10,11 +10,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 
 @Entity
 @Table(name = "notice")
 @Getter
+@Builder(access = AccessLevel.PROTECTED)
 public class NoticeEntity extends CreationUpdateAuditEntity {
 
     @Id
@@ -28,4 +31,8 @@ public class NoticeEntity extends CreationUpdateAuditEntity {
     @Column
     @Enumerated(EnumType.STRING)
     private eNoticeType type;
+
+    public static NoticeEntity createEmailNotification(String email){
+        return NoticeEntity.builder().email(email).type(eNoticeType.email).build();
+    }
 }

@@ -9,4 +9,6 @@ import com.movie.backend.model.entity.notice.eNoticeType;
 
 public interface NoticeRepository extends JpaRepository<NoticeEntity, Integer> {
     List<NoticeEntity> findByType(eNoticeType type);
+
+    boolean existsByEmail(String email);
 }
