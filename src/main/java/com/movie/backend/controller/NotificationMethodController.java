@@ -22,7 +22,7 @@ public class NotificationMethodController {
 
     @PostMapping
     public ResponseEntity<CommonResponse> save(@Valid @RequestBody SaveNoticeMethodRequest request) {
-        if(request.getMethod().equals(eNoticeType.email)){
+        if(eNoticeType.email.name().equals(request.getMethod())){
             emailNoticeService.saveNotificationMethod(request.getEmail());
         }else{
             // 유효성 검사가 전처리되기 때문에 해당 코드가 실행될수 없음.
