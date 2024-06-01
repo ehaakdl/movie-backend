@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.movie.backend.model.entity.notice.eNoticeType;
 import com.movie.backend.model.request.SaveNoticeMethodRequest;
 import com.movie.backend.model.response.CommonResponse;
 import com.movie.backend.service.notice.EmailNoticeService;
@@ -21,7 +22,14 @@ public class NotificationMethodController {
 
     @PostMapping
     public ResponseEntity<CommonResponse> save(@Valid @RequestBody SaveNoticeMethodRequest request) {
-        emailNoticeService.saveNotificationMethod(request.getEmail());
+        if(request.getMethod().equals(eNoticeType.email)){
+            emailNoticeService.saveNotificationMethod(request.getEmail());
+        }else{
+            // 유효성 검사가 전처리되기 때문에 해당 코드가 실행될수 없음.
+            // 만약된 실행된다면 로직상 에러다.
+            throw new RuntimeException();
+        }
+        
         return ResponseEntity.ok(CommonResponse.empty());
     }
 }
