@@ -49,7 +49,7 @@ services:
       - 3306:3306
     volumes:
       - ./db/initdb:/docker-entrypoint-initdb.d
-      # - ./volume_store/db/data:/var/lib/mysql
+      - ./volume_store/db/data:/var/lib/mysql
       - ./db/conf/my.cnf:/etc/mysql/my.cnf
     networks:
       - movie

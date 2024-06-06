@@ -3,14 +3,17 @@ package com.movie.backend.service.notice;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.movie.backend.exception.EmailContentsGenerateFailException;
+import com.movie.backend.model.entity.movie.MovieEntity;
 import com.movie.backend.model.entity.notice.NoticeEntity;
 import com.movie.backend.model.entity.notice.eNoticeType;
 import com.movie.backend.model.vo.EmailMessageVO;
+import com.movie.backend.repository.MovieRepository;
 import com.movie.backend.repository.NoticeRepository;
 import com.movie.backend.service.EmailSendService;
 import com.movie.backend.utils.ThymeleafUtils;
@@ -25,19 +28,28 @@ import lombok.extern.slf4j.Slf4j;
 public class EmailNoticeService {
     private final NoticeRepository noticeRepository;
     private final EmailSendService emailService;
+    private final MovieRepository movieRepository;
     private final ThymeleafUtils thymeleafUtils;
+
     @Transactional
     public void notice() {
         List<NoticeEntity> noticEntities = noticeRepository.findByType(eNoticeType.email);
+        if (noticEntities.isEmpty()) {
+            return;
+        }
+
+        List<String> movies = movieRepository.findAll().stream()
+                .map(MovieEntity::getKobisMovieName)
+                .limit(20)
+                .collect(Collectors.toList());
 
         // TODO 메일 알림 템플릿 작성
         noticEntities.forEach(notice -> {
-            Map<String, String> model = new HashMap<>();
-            model.put("key", "key입니다.");
-            model.put("value", "값입니다.");
+            Map<String, Object> model = new HashMap<>();
+            model.put("movieNames", movies);
 
             String contents = thymeleafUtils.generate(eThymeleafTemplateName.email_notice, model);
-            if(contents == null){
+            if (contents == null) {
                 // TODO 스케줄러에서 예외 처리하는 곳에서 처리하기
                 throw new EmailContentsGenerateFailException(eThymeleafTemplateName.email_notice, model);
             }
@@ -49,10 +61,10 @@ public class EmailNoticeService {
 
     @Transactional
     public void saveNotificationMethod(String email) {
-        if(noticeRepository.existsByEmail(email)){
+        if (noticeRepository.existsByEmail(email)) {
             throw new AlreadyRegisterEmailException(email);
         }
-        
+
         noticeRepository.save(NoticeEntity.createEmailNotification(email));
     }
 

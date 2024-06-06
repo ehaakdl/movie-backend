@@ -6,8 +6,12 @@
 </head>
 
 <body>
-    <p>Key: <span th:text="${key}">Key</span></p>
-    <p>Value: <span th:text="${value}">Value</span></p>
+    <h1>Top 20 Movie Names</h1>
+    <ul>
+        <li th:each="movieName : ${movieNames}">
+            <span th:text="${movieName}">Movie Name</span>
+        </li>
+    </ul>
 </body>
 
 </html>

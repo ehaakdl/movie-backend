@@ -11,6 +11,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmailContentsGenerateFailException extends RuntimeException{
     private final eThymeleafTemplateName templateName;
-    private final Map<String, String> model;
+    private final Map<String, Object> model;
     
 }
