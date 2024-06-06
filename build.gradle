@@ -86,16 +86,16 @@ jib{
 	def envMap = envProp.entrySet().collectEntries { entry ->
     [(entry.key): entry.value]
 	}
-	def cmdEnvArgs = envProp.collect { key, value ->
-    	"-D${key}=${value}"
-	}.join(' ')
+	// def cmdEnvArgs = envProp.collect { key, value ->
+    // 	"-D${key}=${value}"
+	// }.join(' ')
 	
 	container {
 		creationTime='USE_CURRENT_TIMESTAMP'
 		environment=envMap
 		jvmFlags = ['-Duser.timezone=GMT']
 		ports = ["8080"]
-		entrypoint=['java', cmdEnvArgs, '-jar', 'backend' + '-' + version + '.jar']
+		entrypoint=['java', '-jar', 'backend' + '-' + version + '.jar']
 	}
 
 	extraDirectories {

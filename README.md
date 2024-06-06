@@ -13,7 +13,6 @@ docker rmi movie-backend:latest movie-backend:1.0.0
 ## Docker 이미지 생성
 
 ```
-./gradlew build jibDockerBuild
 ./gradlew --exclude-task test build jibDockerBuild
 ```
 
@@ -25,10 +24,10 @@ docker rmi movie-backend:latest movie-backend:1.0.0
 
 ## aws docker compose
 ```
-docker-compose  -f .docker/aws-docker-compose.yml --env-file .docker/.env up
+docker-compose  -f .docker/aws-docker-compose.yml up -d
 ```
 
 ## local docker compose
 ```
-docker-compose  -f .docker/local-docker-compose.yml --env-file .docker/.env up
+docker-compose  -f .docker/local-docker-compose.yml up -d
 ```
