@@ -24,7 +24,7 @@ docker rmi movie-backend:latest movie-backend:1.0.0
 
 ## aws docker compose
 ```
-docker-compose  -f .docker/aws-docker-compose.yml up -d
+docker-compose  -f .docker/prod-docker-compose.yml up -d
 ```
 
 ## local docker compose
