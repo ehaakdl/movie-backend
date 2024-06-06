@@ -22,18 +22,17 @@ public class EmailSendService {
     public void send(EmailMessageVO emailMessage) {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         try {
-            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false, StandardCharsets.UTF_8.name());
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, false,
+                    StandardCharsets.UTF_8.name());
             String to = emailMessage.getTo(); // 메일 수신자
             String subject = emailMessage.getSubject(); // 메일 제목
-            String body = emailMessage.getBody(); //메일 본문
-            mimeMessageHelper.setTo(to); 
-            mimeMessageHelper.setSubject(subject); 
-            mimeMessageHelper.setText(body);
+            String body = emailMessage.getBody(); // 메일 본문
+            mimeMessageHelper.setTo(to);
+            mimeMessageHelper.setSubject(subject);
+            mimeMessageHelper.setText(body, true);
 
             javaMailSender.send(mimeMessage);
-        } catch (MessagingException e) {
-            throw new EmailSendFailException(e);
-        } catch(MailSendException e){
+        } catch (Exception e) {
             throw new EmailSendFailException(e);
         }
     }

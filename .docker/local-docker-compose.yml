@@ -1,39 +1,39 @@
 version: '3'
 services:
-  web:
-    image: ehaakdl/movie-web:latest
-    container_name: web
-    ports:
-      - 4173:4173
-    networks:
-      - movie
-    volumes:
-      - ./volume_store/web/.env:/app/.env
+  # web:
+  #   image: ehaakdl/movie-web:latest
+  #   container_name: web
+  #   ports:
+  #     - 4173:4173
+  #   networks:
+  #     - movie
+  #   volumes:
+  #     - ./volume_store/web/.env:/app/.env
       
-  backend:
-    image: ehaakdl/movie-backend:latest
-    container_name: backend
-    environment:
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
-      DB_DATABASE: ${DB_DATABASE}
-      MAIL_PASSWORD: ${MAIL_PASSWORD}
-      MAIL_ID: ${MAIL_ID}
-      OAUTH_GOOGLE_CLIENT_SECRET: ${OAUTH_GOOGLE_CLIENT_SECRET}
-      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
-      SHCEDULER_THREAD_POOL_SIZE: ${SHCEDULER_THREAD_POOL_SIZE}
-      KOBIS_BASE_URL: ${KOBIS_BASE_URL}
-      KOBIS_API_KEY: ${KOBIS_API_KEY}
-      KOBIS_MOVIE_WEEKLY_INFO_URL: ${KOBIS_MOVIE_WEEKLY_INFO_URL}
-      KOBIS_MOVIE_INFO_URL: ${KOBIS_MOVIE_INFO_URL}
-      KOBIS_MOVIE_SEARCH_TASK_CRON: ${KOBIS_MOVIE_SEARCH_TASK_CRON}
-      MOVIE_NOTICE_TASK_CRON: ${MOVIE_NOTICE_TASK_CRON}
-    ports:
-      - 8080:8080
-    networks:
-      - movie
+  # backend:
+  #   image: ehaakdl/movie-backend:latest
+  #   container_name: backend
+  #   environment:
+  #     DB_USER: ${DB_USER}
+  #     DB_PASSWORD: ${DB_PASSWORD}
+  #     DB_HOST: ${DB_HOST}
+  #     DB_PORT: ${DB_PORT}
+  #     DB_DATABASE: ${DB_DATABASE}
+  #     MAIL_PASSWORD: ${MAIL_PASSWORD}
+  #     MAIL_ID: ${MAIL_ID}
+  #     OAUTH_GOOGLE_CLIENT_SECRET: ${OAUTH_GOOGLE_CLIENT_SECRET}
+  #     JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+  #     SHCEDULER_THREAD_POOL_SIZE: ${SHCEDULER_THREAD_POOL_SIZE}
+  #     KOBIS_BASE_URL: ${KOBIS_BASE_URL}
+  #     KOBIS_API_KEY: ${KOBIS_API_KEY}
+  #     KOBIS_MOVIE_WEEKLY_INFO_URL: ${KOBIS_MOVIE_WEEKLY_INFO_URL}
+  #     KOBIS_MOVIE_INFO_URL: ${KOBIS_MOVIE_INFO_URL}
+  #     KOBIS_MOVIE_SEARCH_TASK_CRON: ${KOBIS_MOVIE_SEARCH_TASK_CRON}
+  #     MOVIE_NOTICE_TASK_CRON: ${MOVIE_NOTICE_TASK_CRON}
+  #   ports:
+  #     - 8080:8080
+  #   networks:
+  #     - movie
     
   db:
     image: mysql:8.0.32
@@ -49,7 +49,7 @@ services:
       - 3306:3306
     volumes:
       - ./db/initdb:/docker-entrypoint-initdb.d
-      # - ./volume_store/db/data/mysql:/var/lib/mysql --user 1000
+      - ./volume_store/db/data:/var/lib/mysql
       - ./db/conf/my.cnf:/etc/mysql/my.cnf
     networks:
       - movie

@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.movie.backend.model.entity.UserEntity;
 import com.movie.backend.model.request.TestRequest;
 import com.movie.backend.repository.CustomRepository;
-import com.movie.backend.repository.UserRepository;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -21,15 +19,8 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 @RequiredArgsConstructor
 public class TestController {
-    private final UserRepository userRepository;
     private final CustomRepository customRepository;
-
-    @GetMapping("/api/v1/test")
-    public String test() {
-        UserEntity user = userRepository.findByEmail("test").orElseThrow(() -> new RuntimeException());
-        return user.getEmail();
-    }
-
+    
     @PostMapping("/api/v1/post")
     public ResponseEntity<Object> post(@Valid  @NotBlank @RequestParam String name) {
         return ResponseEntity.ok("e");
