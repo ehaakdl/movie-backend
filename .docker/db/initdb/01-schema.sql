@@ -30,7 +30,7 @@ COLLATE='utf8mb4_0900_ai_ci'
 ENGINE=InnoDB
 ;
 
-CREATE TABLE `movie` (
+CREATE TABLE IF NOT EXISTS `movie` (
 	`id` INT(10) NOT NULL AUTO_INCREMENT,
 	`api_provider_type` VARCHAR(100) NOT NULL DEFAULT '0' COMMENT 'api 제공자\r\n- kobis' COLLATE 'utf8mb4_0900_ai_ci',
 	`kobis_movie_code` VARCHAR(100) NULL DEFAULT '0' COMMENT '영화 코드' COLLATE 'utf8mb4_0900_ai_ci',
@@ -56,7 +56,7 @@ ENGINE=InnoDB
 
 
 
-CREATE TABLE `notice` (
+CREATE TABLE IF NOT EXISTS `notice` (
 	`id` INT(10) NOT NULL AUTO_INCREMENT,
 	`email` VARCHAR(255) NULL DEFAULT '' COLLATE 'utf8mb4_0900_ai_ci',
 	`type` VARCHAR(20) NOT NULL DEFAULT '' COMMENT '알림 유형\r\n- email' COLLATE 'utf8mb4_0900_ai_ci',
@@ -65,6 +65,20 @@ CREATE TABLE `notice` (
 	PRIMARY KEY (`id`) USING BTREE
 )
 COMMENT='알림 수단에 대한 정보를 담는다'
+COLLATE='utf8mb4_0900_ai_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE IF NOT EXISTS `notice_history` (
+	`id` INT(10) NOT NULL AUTO_INCREMENT,
+	`type` VARCHAR(50) NOT NULL COMMENT '유형\r\n- email' COLLATE 'utf8mb4_0900_ai_ci',
+	`notice_email` VARCHAR(255) NOT NULL COMMENT 'email 알림정보' COLLATE 'utf8mb4_0900_ai_ci',
+	`created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`deleted_at` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`id`) USING BTREE
+)
+COMMENT='알림내역을 저장한다.'
 COLLATE='utf8mb4_0900_ai_ci'
 ENGINE=InnoDB
 ;
