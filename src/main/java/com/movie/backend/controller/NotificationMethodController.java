@@ -1,9 +1,10 @@
 package com.movie.backend.controller;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.movie.backend.model.entity.notice.eNoticeType;
@@ -21,7 +22,8 @@ public class NotificationMethodController {
     private final EmailNoticeService emailNoticeService;
 
     @PostMapping
-    public ResponseEntity<CommonResponse> save(@Valid @RequestBody SaveNoticeMethodRequest request) {
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public CommonResponse save(@Valid @RequestBody SaveNoticeMethodRequest request) {
         if(eNoticeType.email.name().equals(request.getMethod())){
             emailNoticeService.saveNotificationMethod(request.getEmail());
         }else{
@@ -30,6 +32,6 @@ public class NotificationMethodController {
             throw new RuntimeException();
         }
         
-        return ResponseEntity.ok(CommonResponse.empty());
+        return CommonResponse.create("성공적으로 저장되었습니다.");
     }
 }

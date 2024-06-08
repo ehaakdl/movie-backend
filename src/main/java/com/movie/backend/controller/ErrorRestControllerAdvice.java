@@ -16,6 +16,8 @@ import com.movie.backend.service.notice.AlreadyRegisterEmailException;
 
 @RestControllerAdvice
 public class ErrorRestControllerAdvice {
+    private static String BAD_REQUEST_MESSAGE = "잘못된 요청입니다.";
+    
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<CommonResponse> unkownError(Exception exception) {
         return new ResponseEntity<>(
@@ -26,7 +28,7 @@ public class ErrorRestControllerAdvice {
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     public ResponseEntity<CommonResponse> badRequestNotReadableError(Exception exception) {
         return new ResponseEntity<>(
-                CommonResponse.emptyError(),
+                CommonResponse.createError(BAD_REQUEST_MESSAGE),
                 HttpStatus.BAD_REQUEST);
     }
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
@@ -36,7 +38,7 @@ public class ErrorRestControllerAdvice {
                 .forEach(error -> errors.put(((FieldError) error).getField(), error.getDefaultMessage()));
 
         return new ResponseEntity<>(
-                CommonResponse.createError(errors),
+                CommonResponse.createError(errors, BAD_REQUEST_MESSAGE),
                 HttpStatus.BAD_REQUEST);
     }
 

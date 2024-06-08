@@ -18,16 +18,21 @@ import lombok.RequiredArgsConstructor;
 @Builder(access = AccessLevel.PROTECTED)
 @Getter
 public class CommonResponse {
-    private Object data;
+    private Object contents;
     private final Date issuedAt;
     private final eResponseStatusCodeType status;
     private Object error;
     private String message;
 
-    public static CommonResponse create(Object data) {
-        return CommonResponse.builder().data(data).status(eResponseStatusCodeType.success).issuedAt(new Date()).build();
+    public static CommonResponse create(String message) {
+        return CommonResponse.builder().message(message).status(eResponseStatusCodeType.success).issuedAt(new Date())
+                .build();
     }
-    
+
+    public static CommonResponse create(Object data) {
+        return CommonResponse.builder().contents(data).status(eResponseStatusCodeType.success).issuedAt(new Date()).build();
+    }
+
     public static CommonResponse empty() {
         return CommonResponse.builder().status(eResponseStatusCodeType.success).issuedAt(new Date()).build();
     }
@@ -36,11 +41,13 @@ public class CommonResponse {
         return CommonResponse.builder().status(eResponseStatusCodeType.fail).issuedAt(new Date()).build();
     }
 
-    public static CommonResponse createError(Map<String, String> error) {
-        return CommonResponse.builder().error(error).status(eResponseStatusCodeType.fail).issuedAt(new Date()).build();
+    public static CommonResponse createError(Map<String, String> error, String message) {
+        return CommonResponse.builder().error(error).message(message).status(eResponseStatusCodeType.fail)
+                .issuedAt(new Date()).build();
     }
 
     public static CommonResponse createError(String message) {
-        return CommonResponse.builder().error(message).status(eResponseStatusCodeType.fail).issuedAt(new Date()).build();
+        return CommonResponse.builder().message(message).status(eResponseStatusCodeType.fail).issuedAt(new Date())
+                .build();
     }
 }
