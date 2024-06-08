@@ -7,8 +7,6 @@ services:
   #     - 4173:4173
   #   networks:
   #     - movie
-  #   volumes:
-  #     - ./volume_store/web/.env:/app/.env
       
   # backend:
   #   image: ehaakdl/movie-backend:latest
