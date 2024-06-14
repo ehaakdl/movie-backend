@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.movie.backend.model.response.CommonResponse;
-import com.movie.backend.service.notice.AlreadyRegisterEmailException;
+import com.movie.backend.service.notice.AlreadyRegisterUserException;
 
 @RestControllerAdvice
 public class ErrorRestControllerAdvice {
@@ -42,8 +42,8 @@ public class ErrorRestControllerAdvice {
                 HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(value = AlreadyRegisterEmailException.class)
-    public ResponseEntity<CommonResponse> badRequestAlereadyRegisterEmail(AlreadyRegisterEmailException exception) {
+    @ExceptionHandler(value = AlreadyRegisterUserException.class)
+    public ResponseEntity<CommonResponse> badRequestAlereadyRegisterEmail(AlreadyRegisterUserException exception) {
         
         return new ResponseEntity<>(
                 CommonResponse.createError("이미 등록된 이메일입니다."),

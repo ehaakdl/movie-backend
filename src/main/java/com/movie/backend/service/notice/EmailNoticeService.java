@@ -3,42 +3,39 @@ package com.movie.backend.service.notice;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.movie.backend.exception.EmailContentsGenerateFailException;
+import com.movie.backend.model.entity.UserEntity;
 import com.movie.backend.model.entity.movie.MovieEntity;
-import com.movie.backend.model.entity.notice.NoticeEntity;
 import com.movie.backend.model.entity.notice.NoticeHistoryEntity;
-import com.movie.backend.model.entity.notice.eNoticeType;
 import com.movie.backend.model.vo.EmailMessageVO;
 import com.movie.backend.repository.MovieRepository;
 import com.movie.backend.repository.NoticeHistoryRepository;
-import com.movie.backend.repository.NoticeRepository;
+import com.movie.backend.repository.UserRepository;
 import com.movie.backend.service.EmailSendService;
 import com.movie.backend.utils.ThymeleafUtils;
 import com.movie.backend.utils.eThymeleafTemplateName;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class EmailNoticeService {
-    private final NoticeRepository noticeRepository;
+    private final UserRepository userRepository;
     private final NoticeHistoryRepository noticeHistoryRepository;
     private final EmailSendService emailService;
     private final MovieRepository movieRepository;
     private final ThymeleafUtils thymeleafUtils;
 
     @Transactional
-    public void saveAllHistory(List<String> emailList) {
-        List<NoticeHistoryEntity> noticeHistoryEntities = emailList.stream().map(email -> {
-            return NoticeHistoryEntity.create(email);
+    public void saveAllHistory(List<UserEntity> userEntities) {
+        List<NoticeHistoryEntity> noticeHistoryEntities = userEntities.stream().map(userEntity -> {
+            return NoticeHistoryEntity.create(userEntity);
         }).collect(Collectors.toList());
 
         noticeHistoryRepository.saveAll(noticeHistoryEntities);
@@ -46,8 +43,8 @@ public class EmailNoticeService {
 
     @Transactional
     public void notice() {
-        List<NoticeEntity> noticeEntities = noticeRepository.findByType(eNoticeType.email);
-        if (noticeEntities.isEmpty()) {
+        List<UserEntity> userEntities = userRepository.findAllByDeletedAtIsNull();
+        if (userEntities.isEmpty()) {
             return;
         }
 
@@ -57,7 +54,7 @@ public class EmailNoticeService {
                 .collect(Collectors.toList());
 
         // TODO 메일 알림 템플릿 작성
-        noticeEntities.forEach(notice -> {
+        userEntities.forEach(notice -> {
             Map<String, Object> model = new HashMap<>();
             model.put("movieNames", movies);
 
@@ -71,20 +68,6 @@ public class EmailNoticeService {
             emailService.send(message);
         });
 
-        List<String> emailList = noticeEntities.stream().map(noticeEntity -> {
-            return noticeEntity.getEmail();
-        }).collect(Collectors.toList());
-
-        saveAllHistory(emailList);
+        saveAllHistory(userEntities);
     }
-
-    @Transactional
-    public void saveNotificationMethod(String email) {
-        if (noticeRepository.existsByEmail(email)) {
-            throw new AlreadyRegisterEmailException(email);
-        }
-
-        noticeRepository.save(NoticeEntity.createEmailNotification(email));
-    }
-
 }

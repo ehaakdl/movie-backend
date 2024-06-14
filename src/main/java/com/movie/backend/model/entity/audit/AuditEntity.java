@@ -11,6 +11,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 
+// TODO cratedBy, updatedBy,deletedBy 추가하기
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @Getter

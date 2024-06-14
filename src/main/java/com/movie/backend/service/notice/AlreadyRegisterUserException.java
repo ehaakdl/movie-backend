@@ -5,6 +5,6 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class AlreadyRegisterEmailException extends RuntimeException {
+public class AlreadyRegisterUserException extends RuntimeException {
     private final String email;
 }
