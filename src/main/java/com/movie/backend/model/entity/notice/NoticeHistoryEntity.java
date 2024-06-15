@@ -1,7 +1,6 @@
 package com.movie.backend.model.entity.notice;
 
 import com.movie.backend.model.entity.UserEntity;
-import com.movie.backend.model.entity.audit.AuditEntity;
 import com.movie.backend.model.entity.audit.CreationUpdateAuditEntity;
 
 import jakarta.persistence.Column;
