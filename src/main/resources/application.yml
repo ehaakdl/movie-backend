@@ -21,7 +21,7 @@ kobis:
 decorator:
   datasource:
     p6spy:
-      enable-logging: false
+      enable-logging: true
 
 logging:
   level:

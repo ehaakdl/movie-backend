@@ -25,12 +25,13 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class EmailNotificationService {
+public class EmailNoticeService {
     private final UserRepository userRepository;
     private final NoticeHistoryRepository noticeHistoryRepository;
     private final EmailSendingService emailService;
     private final MovieRepository movieRepository;
     private final ThymeleafUtils thymeleafUtils;
+    private final NoticeTargetUserFinder noticeTargetUserFinder;
 
     @Transactional
     public void saveAllHistory(List<UserEntity> userEntities) {
@@ -43,11 +44,13 @@ public class EmailNotificationService {
 
     @Transactional
     public void notice() {
-        List<UserEntity> userEntities = userRepository.findAllByDeletedAtIsNull();
+        // 알림 대상 추출
+        List<UserEntity> userEntities = noticeTargetUserFinder.findByUnnotifiedOrNewMovie();
         if (userEntities.isEmpty()) {
             return;
         }
 
+        // TODO 알림 대상별 데이터 추출
         List<String> movies = movieRepository.findAll().stream()
                 .map(MovieEntity::getKobisMovieName)
                 .limit(20)
