@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class KobisSearchScheduler {
+public class KobisSearchingScheduler {
         @Value("${kobis.base-url}")
         private String kobisBaseUrl;
         @Value("${kobis.api-key}")

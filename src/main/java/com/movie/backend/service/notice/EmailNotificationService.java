@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class EmailNoticeService {
+public class EmailNotificationService {
     private final UserRepository userRepository;
     private final NoticeHistoryRepository noticeHistoryRepository;
     private final EmailSendService emailService;
