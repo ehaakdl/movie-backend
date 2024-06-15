@@ -1,4 +1,4 @@
-package com.movie.backend.service.filter;
+package com.movie.backend.service.movie;
 
 import java.util.List;
 

@@ -2,21 +2,19 @@ package com.movie.backend.service;
 
 import java.nio.charset.StandardCharsets;
 
-import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import com.movie.backend.exception.EmailSendFailException;
+import com.movie.backend.exception.EmailSendingFailException;
 import com.movie.backend.model.vo.EmailMessageVO;
 
-import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class EmailSendService {
+public class EmailSendingService {
     private final JavaMailSender javaMailSender;
 
     public void send(EmailMessageVO emailMessage) {
@@ -33,7 +31,7 @@ public class EmailSendService {
 
             javaMailSender.send(mimeMessage);
         } catch (Exception e) {
-            throw new EmailSendFailException(e);
+            throw new EmailSendingFailException(e);
         }
     }
 }

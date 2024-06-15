@@ -1,4 +1,4 @@
-package com.movie.backend.service.notice;
+package com.movie.backend.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

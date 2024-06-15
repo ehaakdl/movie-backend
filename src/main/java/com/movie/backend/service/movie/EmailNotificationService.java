@@ -1,4 +1,4 @@
-package com.movie.backend.service.notice;
+package com.movie.backend.service.movie;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +16,7 @@ import com.movie.backend.model.vo.EmailMessageVO;
 import com.movie.backend.repository.MovieRepository;
 import com.movie.backend.repository.NoticeHistoryRepository;
 import com.movie.backend.repository.UserRepository;
-import com.movie.backend.service.EmailSendService;
+import com.movie.backend.service.EmailSendingService;
 import com.movie.backend.utils.ThymeleafUtils;
 import com.movie.backend.utils.eThymeleafTemplateName;
 
@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 public class EmailNotificationService {
     private final UserRepository userRepository;
     private final NoticeHistoryRepository noticeHistoryRepository;
-    private final EmailSendService emailService;
+    private final EmailSendingService emailService;
     private final MovieRepository movieRepository;
     private final ThymeleafUtils thymeleafUtils;
 

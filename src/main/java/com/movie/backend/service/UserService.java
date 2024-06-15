@@ -3,9 +3,9 @@ package com.movie.backend.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.movie.backend.exception.AlreadyRegisterUserException;
 import com.movie.backend.model.entity.UserEntity;
 import com.movie.backend.repository.UserRepository;
-import com.movie.backend.service.notice.AlreadyRegisterUserException;
 
 import lombok.RequiredArgsConstructor;
 

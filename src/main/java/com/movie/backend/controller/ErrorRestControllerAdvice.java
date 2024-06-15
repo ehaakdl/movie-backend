@@ -11,8 +11,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.movie.backend.exception.AlreadyRegisterUserException;
 import com.movie.backend.model.response.CommonResponse;
-import com.movie.backend.service.notice.AlreadyRegisterUserException;
 
 @RestControllerAdvice
 public class ErrorRestControllerAdvice {
