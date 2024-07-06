@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public class EmailContentsGenerateFailException extends RuntimeException{
+public class ThymeleafGenerateFailException extends RuntimeException{
     private final eThymeleafTemplateName templateName;
     private final Map<String, Object> model;
     
