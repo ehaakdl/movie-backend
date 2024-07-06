@@ -28,6 +28,12 @@ docker-compose  -f .docker/prod-docker-compose.yml up -d
 ```
 
 ## local docker compose
+
 ```
 docker-compose  -f .docker/local-docker-compose.yml up -d
 ```
+
+## DB ERD
+![movie_erd](https://github.com/ehaakdl/movie-backend/assets/6407466/cc292087-a32a-4c65-9891-0cf396e18c6d)
+
+
