@@ -1,5 +1,6 @@
 package com.movie.backend.scheduler.handler;
 
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ErrorHandler;
 
@@ -12,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SchedulerErrorHandler implements ErrorHandler {
     
     @Override
-    public void handleError(Throwable throwable) {
+    public void handleError(@NonNull Throwable throwable) {
         if (throwable instanceof MovieSearchFailException) {
 
             MovieSearchFailException exception = (MovieSearchFailException) throwable;
