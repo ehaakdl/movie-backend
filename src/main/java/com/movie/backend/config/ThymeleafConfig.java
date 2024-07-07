@@ -18,6 +18,7 @@ public class ThymeleafConfig {
                 templateResolver.setPrefix(prefix);
                 templateResolver.setSuffix(suffix);
                 templateResolver.setTemplateMode(templateMode);
+                templateResolver.setCacheable(false);
 
                 // https://github.com/thymeleaf/thymeleaf/issues/606
                 templateResolver.setForceTemplateMode(true);
