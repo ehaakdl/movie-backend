@@ -8,14 +8,12 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.movie.backend.exception.EmailContentsGenerateFailException;
-import com.movie.backend.model.entity.UserEntity;
-import com.movie.backend.model.entity.movie.MovieEntity;
-import com.movie.backend.model.entity.notice.NoticeHistoryEntity;
+import com.movie.backend.exception.ThymeleafGenerateFailException;
+import com.movie.backend.model.entity.notice.eNoticeHistoryType;
 import com.movie.backend.model.vo.EmailMessageVO;
-import com.movie.backend.repository.MovieRepository;
-import com.movie.backend.repository.NoticeHistoryRepository;
-import com.movie.backend.repository.UserRepository;
+import com.movie.backend.repository.NoticeCustomRepository;
+import com.movie.backend.repository.model.NoticeHistoryVO;
+import com.movie.backend.repository.model.UserNoticeHistoryVO;
 import com.movie.backend.service.EmailSendingService;
 import com.movie.backend.utils.ThymeleafUtils;
 import com.movie.backend.utils.eThymeleafTemplateName;
@@ -26,51 +24,39 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class EmailNoticeService {
-    private final UserRepository userRepository;
-    private final NoticeHistoryRepository noticeHistoryRepository;
-    private final EmailSendingService emailService;
-    private final MovieRepository movieRepository;
     private final ThymeleafUtils thymeleafUtils;
-    private final NoticeTargetUserFinder noticeTargetUserFinder;
+    private final NoticeCustomRepository noticeCustomRepository;
+    private final EmailSendingService emailSendingService;
 
     @Transactional
-    public void saveAllHistory(List<UserEntity> userEntities) {
-        List<NoticeHistoryEntity> noticeHistoryEntities = userEntities.stream().map(userEntity -> {
-            return NoticeHistoryEntity.create(userEntity);
-        }).collect(Collectors.toList());
-
-        noticeHistoryRepository.saveAll(noticeHistoryEntities);
-    }
-
-    @Transactional
-    public void notice() {
-        // 알림 대상 추출
-        List<UserEntity> userEntities = noticeTargetUserFinder.findByUnnotifiedOrNewMovie();
-        if (userEntities.isEmpty()) {
+    public void notice() {        
+        // 유저별 최근 알림 이력을 조회한다.
+        // 알림이력이 없어도 유저는 조회된다.
+        List<UserNoticeHistoryVO> userNoticeHistories = noticeCustomRepository.getUsersNotifiedAfterOrNoNotifications();
+        if (userNoticeHistories.isEmpty()) {
             return;
         }
 
-        // TODO 알림 대상별 데이터 추출
-        List<String> movies = movieRepository.findAll().stream()
-                .map(MovieEntity::getKobisMovieName)
-                .limit(20)
-                .collect(Collectors.toList());
+        // 알림 이력 저장
+        List<NoticeHistoryVO> noticeHistories = userNoticeHistories.stream().map(t -> new NoticeHistoryVO(t.getUserId(), eNoticeHistoryType.email)).collect(Collectors.toList());
+        noticeCustomRepository.bulkInsert(noticeHistories);
 
-        // TODO 메일 알림 템플릿 작성
-        userEntities.forEach(notice -> {
+        // TODO 비동기로 작성
+        userNoticeHistories.forEach(userNoticeHistory -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("movieNames", movies);
+            // TODO 영화 조회 API 개발 필요
+            model.put("query", "영화 조회 API 필요");
 
+            // html 생성
             String contents = thymeleafUtils.generate(eThymeleafTemplateName.email_notice, model);
             if (contents == null) {
-                // TODO 스케줄러에서 예외 처리하는 곳에서 처리하기
-                throw new EmailContentsGenerateFailException(eThymeleafTemplateName.email_notice, model);
+                throw new ThymeleafGenerateFailException(eThymeleafTemplateName.email_notice, model);
             }
 
-            EmailMessageVO message = EmailMessageVO.create(notice.getEmail(), "영화 정보", contents);
-            emailService.send(message);
+            EmailMessageVO message = EmailMessageVO.create(userNoticeHistory.getEmail(), "영화 정보", contents);
+            emailSendingService.send(message);
         });
-
-        saveAllHistory(userEntities);
+        
+        
     }
 }

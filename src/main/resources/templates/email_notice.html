@@ -6,12 +6,9 @@
 </head>
 
 <body>
-    <h1>Top 20 Movie Names</h1>
-    <ul>
-        <li th:each="movieName : ${movieNames}">
-            <span th:text="${movieName}">Movie Name</span>
-        </li>
-    </ul>
+    <h1>영화정보를 보세요</h1>    
+    <a th:href="@{~/movies/search(query=${query})}">영화정보 링크</a>
+
 </body>
 
 </html>
