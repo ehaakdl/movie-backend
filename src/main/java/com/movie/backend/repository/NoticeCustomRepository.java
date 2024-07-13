@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,8 +26,13 @@ public class NoticeCustomRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
+    /**
+     * 유저별 최근 알림 이력을 조회한다.
+     * 알림이력이 없어도 조회된다.
+     * @return
+     */
     @Transactional
-    public List<UserNoticeHistoryVO> getUsersNotifiedAfterOrNoNotifications() {
+    public List<UserNoticeHistoryVO> getRecentNotificationsOrNone() {
         String sql = "SELECT user.id as user_id, user.email, recent_notices.created_at as noticed_at " +
                 "FROM user " +
                 "LEFT JOIN (SELECT user_id, id, created_at, " +
@@ -37,7 +43,7 @@ public class NoticeCustomRepository {
 
         return jdbcTemplate.query(sql, new ResultSetExtractor<List<UserNoticeHistoryVO>>() {
             @Override
-            public List<UserNoticeHistoryVO> extractData(ResultSet rs) throws SQLException {
+            public List<UserNoticeHistoryVO> extractData(@NonNull ResultSet rs) throws SQLException {
                 List<UserNoticeHistoryVO> results = new ArrayList<>();
                 while (rs.next()) {
                     Long userId = rs.getLong("user_id");
@@ -52,18 +58,18 @@ public class NoticeCustomRepository {
     }
 
     /**
-     * getUsersNotifiedAfterOrNoNotifications 사용하여 유저를 가져올때 Jpa 에 종속된 Entity를 가져오지 못해서 saveAll
+     * getRecentNotificationsOrNone 사용하여 유저를 가져올때 Jpa 에 종속된 Entity를 가져오지 못해서 saveAll
      * 함수를 사용할 수 없어 jdbcTemplate을 사용하여 bulkInsert함.
+     * @Modifying 붙어야 insert sql 실행됨
      * @param items
      */
     @Transactional
-    // @Modifying 붙어야 insert sql 실행됨
     @Modifying
     public void bulkInsert(List<NoticeHistoryVO> items){
         String sql = "INSERT INTO notice_history (user_id, type) VALUES (?, ?)";
         jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
                     @Override
-                    public void setValues(PreparedStatement ps, int i) throws SQLException {
+                    public void setValues(@NonNull PreparedStatement ps, int i) throws SQLException {
                         ps.setLong(1, items.get(i).getUserId());
                         ps.setString(2, items.get(i).getType().name());
                     }

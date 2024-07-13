@@ -19,10 +19,8 @@ import com.movie.backend.utils.ThymeleafUtils;
 import com.movie.backend.utils.eThymeleafTemplateName;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class EmailNoticeService {
     private final ThymeleafUtils thymeleafUtils;
     private final NoticeCustomRepository noticeCustomRepository;
@@ -32,13 +30,17 @@ public class EmailNoticeService {
     public void notice() {        
         // 유저별 최근 알림 이력을 조회한다.
         // 알림이력이 없어도 유저는 조회된다.
-        List<UserNoticeHistoryVO> userNoticeHistories = noticeCustomRepository.getUsersNotifiedAfterOrNoNotifications();
+        List<UserNoticeHistoryVO> userNoticeHistories = noticeCustomRepository.getRecentNotificationsOrNone();
         if (userNoticeHistories.isEmpty()) {
             return;
         }
 
         // 알림 이력 저장
-        List<NoticeHistoryVO> noticeHistories = userNoticeHistories.stream().map(t -> new NoticeHistoryVO(t.getUserId(), eNoticeHistoryType.email)).collect(Collectors.toList());
+        // 메일 전송 코드에서 실패하더라도 이력은 남긴다.
+        List<NoticeHistoryVO> noticeHistories = userNoticeHistories.stream()
+        .map(item -> new NoticeHistoryVO(item.getUserId(), eNoticeHistoryType.email))
+        .collect(Collectors.toList());
+        // jpa가 아닌 jdbcTemplate 사용하여 조회했기 때문에 bulk insert도 jdbctTemplate로 구현됨
         noticeCustomRepository.bulkInsert(noticeHistories);
 
         // TODO 비동기로 작성
