@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.movie.backend.model.request.UserRegisterRequest;
+import com.movie.backend.model.dto.UserRegisterRequest;
 import com.movie.backend.model.response.CommonResponse;
 import com.movie.backend.service.UserService;
 

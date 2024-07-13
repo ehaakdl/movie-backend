@@ -14,7 +14,7 @@ import com.movie.backend.scheduler.model.response.kobis.KobisErrorResponse;
 import com.movie.backend.scheduler.model.response.kobis.KobisMoviesResponse;
 import com.movie.backend.scheduler.model.response.kobis.KobisResponse;
 import com.movie.backend.scheduler.service.KobisMovieService;
-import com.movie.backend.utils.CommonUtils;
+import com.movie.backend.utils.PagingUtils;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -51,10 +51,10 @@ public class KobisSearchingScheduler {
         @Transactional
         public void movieInfoCollectionJob() {
                 String currentYear = getCurrentYear();
-                int totalPage = 1;
+                long totalPage = 1;
                 int itemPerPage = 100;
                 int page = 1;
-                int totalCount;
+                long totalCount;
                 do {
                         String url = UriComponentsBuilder.fromHttpUrl(kobisBaseUrl)
                                         .path(kobisMovieInfoSearchUrl)
@@ -89,7 +89,7 @@ public class KobisSearchingScheduler {
                         kobisMovieService.saveMovies(moviesResponse.getMovies());
 
                         totalCount = moviesResponse.getTotalCount();
-                        totalPage = CommonUtils.getTotalPage(totalCount, itemPerPage);
+                        totalPage = PagingUtils.getTotalPage(totalCount, itemPerPage);
                         page++;
                 } while (page <= totalPage);
                 log.info("kobis 영화 정보 전체 페이지 수 {}, 전체 카운트 {}", totalPage, totalCount);
