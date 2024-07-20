@@ -1,22 +1,28 @@
 package com.movie.backend.repository;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.movie.backend.model.dto.MovieEntitiesDTO;
-import com.movie.backend.model.dto.MovieSearchRequest;
+import com.movie.backend.model.dto.MovieDTO;
+import com.movie.backend.model.dto.MoviesDTO;
 import com.movie.backend.model.entity.eMovieApiProviderType;
 import com.movie.backend.model.entity.movie.MovieEntity;
 import com.movie.backend.model.entity.movie.QMovieEntity;
+import com.movie.backend.model.request.MovieSearchRequest;
+import com.movie.backend.model.type.eSortOrderType;
 import com.movie.backend.utils.PagingUtils;
 import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.SimpleExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
@@ -27,7 +33,7 @@ import lombok.RequiredArgsConstructor;
 public class MovieCustomRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
-    private ConstructorExpression<MovieEntity> createProjectionForProvider(
+    private ConstructorExpression<MovieDTO> createProjectionForProvider(
             eMovieApiProviderType providerType) {
         QMovieEntity movieEntity = QMovieEntity.movieEntity;
 
@@ -41,55 +47,68 @@ public class MovieCustomRepository {
             throw new IllegalArgumentException("kobis를 제외한 API는 아직 제공하지 않습니다.");
         }
 
-        return Projections.constructor(MovieEntity.class, expr.toArray(new SimpleExpression[0]));
+        return Projections.constructor(MovieDTO.class, expr.toArray(new SimpleExpression[0]));
     }
 
-    private OrderSpecifier<?> createOrderType(QMovieEntity entity, String order) {
-        if (order.equals("desc")) {
-            return entity.createdAt.desc();
-        } else if (order.equals("asc")) {
-            return entity.createdAt.asc();
-        } else {
-            throw new IllegalArgumentException(order + "지원안하는 정렬 유형입니다.");
+    private OrderSpecifier<?> createSortOrder(String filedName, eSortOrderType sortOrderType) {
+        QMovieEntity entity = QMovieEntity.movieEntity;
+        switch (filedName) {
+            case "createdAt":
+                if (sortOrderType.equals(eSortOrderType.desc)) {
+                    return entity.createdAt.desc();
+                } else {
+                    return entity.createdAt.asc();
+                }
+
+            default:
+                throw new IllegalArgumentException(sortOrderType + "지원안하는 정렬입니다.");
         }
 
     }
-
-    private OrderSpecifier<?> createOrderBySpec(String field, String order) {
-        QMovieEntity movieEntity = QMovieEntity.movieEntity;
-        if (field.equals(movieEntity.createdAt.toString())) {
-            return createOrderType(movieEntity, order);
-        } else {
-            throw new IllegalArgumentException("지원 안하는 정렬 필드 입니다.");
+    
+    private BooleanExpression betweenCreatedAt(Date startAt, Date endAt) {
+        if (startAt == null || endAt == null) {
+            return null;
         }
+        return QMovieEntity.movieEntity.createdAt.between(startAt, endAt);
+    }
+
+    private BooleanExpression eqApiProviderType(eMovieApiProviderType type) {
+        if (type == null) {
+            return null;
+        }
+        return QMovieEntity.movieEntity.apiProviderType.eq(type);
     }
 
     @Transactional
-    public MovieEntitiesDTO search(MovieSearchRequest request) {
+    public MoviesDTO search(MovieSearchRequest request) {
         eMovieApiProviderType providerType = request.getProvider();
         Date startAt = request.getStartAt();
         Date endAt = request.getEndAt();
         QMovieEntity movieEntity = QMovieEntity.movieEntity;
 
-        // fetchCount 함수가 복잡한 쿼리에서는 잘 동작안함
-        // fetch 로 가져와서 size 구해야함
         long count = jpaQueryFactory.selectFrom(movieEntity).where(
-                movieEntity.apiProviderType.eq(providerType),
-                movieEntity.createdAt.between(startAt, endAt))
+                eqApiProviderType(providerType),
+                betweenCreatedAt(startAt, endAt))
                 .fetch().size();
 
-        int offset = PagingUtils.getOffset(count, request.getPage(), request.getPageSize());
-
-        List<MovieEntity> movies = jpaQueryFactory.select(createProjectionForProvider(providerType))
+        int pageSize = request.getPageSize();
+        int page = request.getPage();
+        int offset = PagingUtils.getOffset(count, page, pageSize);
+        String sortBy = request.getSortBy();
+        eSortOrderType sortOrder = request.getSortOrder();
+        ConstructorExpression<MovieDTO> movieExpr = createProjectionForProvider(providerType);
+        OrderSpecifier<?> orderSpecifier = createSortOrder(sortBy,sortOrder);
+        List<MovieDTO> movies = jpaQueryFactory.select(movieExpr)
                 .from(movieEntity)
                 .where(
-                        movieEntity.apiProviderType.eq(providerType),
-                        movieEntity.createdAt.between(startAt, endAt))
-                .orderBy(createOrderBySpec(request.getSortBy(), request.getSortOrder()))
+                        eqApiProviderType(providerType),
+                        betweenCreatedAt(startAt, endAt))
+                .orderBy(orderSpecifier)
                 .offset(offset)
-                .limit(request.getPageSize())
+                .limit(pageSize)
                 .fetch();
-        
-        return new MovieEntitiesDTO(movies, count);
+
+        return new MoviesDTO(movies, count);
     }
 }

@@ -14,12 +14,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.movie.backend.exception.AlreadyRegisterUserException;
 import com.movie.backend.model.response.CommonResponse;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestControllerAdvice
+@Slf4j
 public class ErrorRestControllerAdvice {
     private static String BAD_REQUEST_MESSAGE = "잘못된 요청입니다.";
-    
+
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<CommonResponse> unkownError(Exception exception) {
+        log.error("500에러 발생", exception.getCause());
         return new ResponseEntity<>(
                 CommonResponse.emptyError(),
                 HttpStatus.INTERNAL_SERVER_ERROR);
@@ -31,6 +35,7 @@ public class ErrorRestControllerAdvice {
                 CommonResponse.createError(BAD_REQUEST_MESSAGE),
                 HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<CommonResponse> badRequestNotValidError(MethodArgumentNotValidException exception) {
         Map<String, String> errors = new HashMap<>();
@@ -44,10 +49,10 @@ public class ErrorRestControllerAdvice {
 
     @ExceptionHandler(value = AlreadyRegisterUserException.class)
     public ResponseEntity<CommonResponse> badRequestAlereadyRegisterEmail(AlreadyRegisterUserException exception) {
-        
+
         return new ResponseEntity<>(
                 CommonResponse.createError("이미 등록된 이메일입니다."),
                 HttpStatus.BAD_REQUEST);
     }
-    
+
 }

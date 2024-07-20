@@ -1,4 +1,4 @@
-package com.movie.backend.model.dto;
+package com.movie.backend.model.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

@@ -1,10 +1,11 @@
-package com.movie.backend.model.dto;
+package com.movie.backend.model.request;
 
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.movie.backend.model.entity.eMovieApiProviderType;
+import com.movie.backend.model.type.eSortOrderType;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -22,7 +23,7 @@ public class MovieSearchRequest {
     @NotNull
     private eMovieApiProviderType provider;
     // desc/asc
-    private String sortOrder;
+    private eSortOrderType sortOrder;
     // 필드명
     private String sortBy;
     private String movieName;

@@ -1,4 +1,4 @@
-package com.movie.backend.model.dto;
+package com.movie.backend.model.response;
 
 import java.util.List;
 

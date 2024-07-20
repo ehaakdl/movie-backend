@@ -1,8 +1,9 @@
-package com.movie.backend.model.dto;
+package com.movie.backend.model.response;
 
 import java.text.ParseException;
 import java.util.Date;
 
+import com.movie.backend.model.dto.MovieDTO;
 import com.movie.backend.model.entity.eMovieApiProviderType;
 import com.movie.backend.model.entity.movie.MovieEntity;
 import com.movie.backend.utils.DateUtils;
@@ -20,15 +21,16 @@ public class MovieSearchItemResponse {
     private final String director;
     private final Date openAt;
 
-    public static MovieSearchItemResponse convertToMovieSearchItemResponseByApiProviderType(MovieEntity movieEntity,
+    public static MovieSearchItemResponse convertToMovieSearchItemResponseByApiProviderType(MovieDTO movie,
             eMovieApiProviderType providerType) {
         if (providerType.equals(eMovieApiProviderType.kobis)) {
             try {
+                Date openAt = DateUtils.parseDate(movie.getKobisMovieOpenDate(), DateUtils.FORMAT_2);
                 return new MovieSearchItemResponse(
-                        movieEntity.getKobisMovieName(),
-                        movieEntity.getCreatedAt(),
-                        movieEntity.getKobisDirectorName(),
-                        DateUtils.parseDate(movieEntity.getKobisMovieOpenDate()));
+                        movie.getKobisMovieName(),
+                        movie.getCreatedAt(),
+                        movie.getKobisDirectorName(),
+                        openAt);
             } catch (ParseException e) {
                 throw new IllegalArgumentException("openDt 시간 변환에 실패하여 응답객체 생성 실패했습니다.", e);
             }

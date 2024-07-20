@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.movie.backend.model.dto.MovieSearchRequest;
+import com.movie.backend.model.request.MovieSearchRequest;
 import com.movie.backend.model.response.CommonResponse;
 import com.movie.backend.service.movie.MovieService;
 
