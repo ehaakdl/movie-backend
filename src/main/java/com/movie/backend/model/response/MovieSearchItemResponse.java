@@ -20,6 +20,7 @@ public class MovieSearchItemResponse {
     private final Date createdAt;
     private final String director;
     private final Date openAt;
+    private final String genre;
 
     public static MovieSearchItemResponse convertToMovieSearchItemResponseByApiProviderType(MovieDTO movie,
             eMovieApiProviderType providerType) {
@@ -30,7 +31,8 @@ public class MovieSearchItemResponse {
                         movie.getKobisMovieName(),
                         movie.getCreatedAt(),
                         movie.getKobisDirectorName(),
-                        openAt);
+                        openAt,
+                        movie.getKobisRepGenreName());
             } catch (ParseException e) {
                 throw new IllegalArgumentException("openDt 시간 변환에 실패하여 응답객체 생성 실패했습니다.", e);
             }

@@ -43,6 +43,8 @@ public class MovieCustomRepository {
             expr.add(movieEntity.kobisDirectorName);
             expr.add(movieEntity.kobisMovieName);
             expr.add(movieEntity.kobisMovieOpenDate);
+            expr.add(movieEntity.kobisMovieGenre);
+            expr.add(movieEntity.kobisRepGenreName);
             expr.add(movieEntity.createdAt);
         } else {
             throw new IllegalArgumentException("kobis를 제외한 API는 아직 제공하지 않습니다.");
@@ -51,6 +53,15 @@ public class MovieCustomRepository {
         return Projections.constructor(MovieDTO.class, expr.toArray(new SimpleExpression[0]));
     }
 
+    private OrderSpecifier<Date> getSortOrder(String sortOrderType) {
+        QMovieEntity entity = QMovieEntity.movieEntity;
+
+        if (sortOrderType.equals(eSortOrderType.desc)) {
+            return entity.createdAt.desc();
+        } else {
+            return entity.createdAt.asc();
+        }
+    }
     private OrderSpecifier<?> createSortOrder(String filedName, eSortOrderType sortOrderType) {
         if(StringUtils.isBlank(filedName)){
             filedName = "createdAt";
@@ -67,7 +78,13 @@ public class MovieCustomRepository {
                 } else {
                     return entity.createdAt.asc();
                 }
-
+            case "genre":
+                if (sortOrderType.equals(eSortOrderType.desc)) {
+                    return entity.kobisMovieGenre.desc();
+                } else {
+                    return entity.kobisMovieGenre.asc();
+                }
+                
             default:
                 throw new IllegalArgumentException(sortOrderType + "지원안하는 정렬입니다.");
         }
