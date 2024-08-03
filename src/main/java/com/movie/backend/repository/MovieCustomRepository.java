@@ -26,6 +26,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.SimpleExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
+import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 
 @Repository
@@ -51,6 +52,13 @@ public class MovieCustomRepository {
     }
 
     private OrderSpecifier<?> createSortOrder(String filedName, eSortOrderType sortOrderType) {
+        if(StringUtils.isBlank(filedName)){
+            filedName = "createdAt";
+        }
+        if(sortOrderType == null){
+            sortOrderType = eSortOrderType.desc;
+        }
+
         QMovieEntity entity = QMovieEntity.movieEntity;
         switch (filedName) {
             case "createdAt":
