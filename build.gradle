@@ -51,7 +51,9 @@ dependencies {
 	
 	// utils
 	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.1'
-	
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+	implementation 'org.apache.commons:commons-lang3:3.15.0'
+
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
     
